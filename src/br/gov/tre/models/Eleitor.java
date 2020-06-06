@@ -38,12 +38,20 @@ public class Eleitor extends Pessoa {
 		this.secaoEleitoral = secaoEleitoral;
 	}
 	
-	public void exibirDados() {
+	public void imprimirDados() {
 		JOptionPane.showMessageDialog(null, "Nome do eleitor: " + super.getNome() + 
 				"\nNúmero do título: " + getNumeroTitulo() +
 				"\nMunicípio: " + super.getMunicipio() + 
 				"\nZona eleitoral: " + getZonaEleitoral() +
 				"\nSeção eleitoral: " + getSecaoEleitoral());
+	}
+	
+	public String retornarDadosImpressao() {
+		return "Nome do eleitor: " + super.getNome() + 
+				" - Número do título: " + getNumeroTitulo() +
+				" - Município: " + super.getMunicipio() + 
+				" - Zona eleitoral: " + getZonaEleitoral() +
+				" - Seção eleitoral: " + getSecaoEleitoral();		 
 	}
 	
 }

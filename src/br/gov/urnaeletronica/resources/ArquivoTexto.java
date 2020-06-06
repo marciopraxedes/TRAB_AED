@@ -5,6 +5,9 @@ import java.io.*;
 import javax.swing.JOptionPane;
 
 import br.gov.tre.models.Eleitor;
+import br.gov.tre.models.PartidoPolitico;
+import br.gov.urnaeletronica.resources.eleitor.TabelaHashEleitor;
+import br.gov.urnaeletronica.resources.eleitor.partidopolitico.ListaPartidoPolitico;
 
 public class ArquivoTexto {
 
@@ -12,7 +15,6 @@ public class ArquivoTexto {
 	BufferedReader entrada;
 	BufferedWriter saida;
 	BufferedWriter saidaTemp;
-	TabelaHash tabelaEleitor;
 
 	String nomeArquivoLocal;
 
@@ -109,10 +111,10 @@ public class ArquivoTexto {
 		return cont;
 	}
 
-	public TabelaHash lerDadosEleitores() {
+	public TabelaHashEleitor lerDadosEleitores() {
 
 		int cont = qtdDados();
-		TabelaHash tabelaEleitor = new TabelaHash(cont);
+		TabelaHashEleitor tabelaEleitor = new TabelaHashEleitor(cont);
 
 		try {
 			for (int index = 0 ; index < cont ; index++) {
@@ -154,6 +156,48 @@ public class ArquivoTexto {
 
 		return tabelaEleitor;
 	}
+	
+	public ListaPartidoPolitico lerDadosPartidoPolitico() {
+
+		int cont = qtdDados();
+		ListaPartidoPolitico tabelaEleitor = new ListaPartidoPolitico();
+
+		try {
+			for (int index = 0 ; index < cont ; index++) {
+
+				//CONVERTE CADA LINHA EM UM VETOR DE STRING
+				String arrayConversor[];
+				arrayConversor = entrada.readLine().split(";");
+
+				//ARMAZEVA E CONVERTE O VALOR DE CADA POSICAO DO VETOR EM UMA VARIAVEL
+				PartidoPolitico novoPartidoPolitico = new PartidoPolitico();
+				novoPartidoPolitico.setNome(arrayConversor[0]); 
+				novoPartidoPolitico.setSigla(arrayConversor[1]);
+
+				//INSERE UMA NOVA PESSOA. SE RETORNAR -1, PESSOA J� EXITE
+				tabelaEleitor.inserirFinal(novoPartidoPolitico);
+									
+			}			
+			retornarInicioArquivo();		
+
+		}
+
+
+		catch (EOFException excecao) { //Exce��o de final de arquivo.
+			System.out.println("Fim de arquivo." + excecao);
+
+		}
+		catch (IOException excecao) {
+			System.out.println("Erro de leitura: " + excecao);
+		}
+
+		catch (NumberFormatException excecao) {
+			System.out.println("\nERROR - N�o � n�mero" + excecao + "\n");
+		}
+
+		return tabelaEleitor;
+	}
+	
 /*
 	public void alterarEleitor (long numeroTitulo) {
 		int opcao = 0;
@@ -186,7 +230,7 @@ public class ArquivoTexto {
 		ArquivoTexto arquivo = new ArquivoTexto();
 		arquivo.criarArquivoTemporario(nomeArquivoLocal);
 
-		TabelaHash tabelaEleitor = new TabelaHash(cont);
+		TabelaHashPartidoPolitico tabelaEleitor = new TabelaHashPartidoPolitico(cont);
 		String arrayConversor[];
 
 		try {

@@ -1,14 +1,16 @@
-package br.gov.urnaeletronica.resources;
+package br.gov.urnaeletronica.resources.eleitor;
+
+import javax.swing.JOptionPane;
 
 import br.gov.tre.models.Eleitor;
 
-public class TabelaHash {
+public class TabelaHashEleitor {
 
 	private int M;
 
 	private ListaEleitor[] tabelaEleitores; 	
 				
-		public TabelaHash(int tamanho){
+		public TabelaHashEleitor(int tamanho){
 			
 			M = tamanho;
 			tabelaEleitores = new ListaEleitor[M];
@@ -78,10 +80,22 @@ public class TabelaHash {
 
 		for(int i=0 ; i < M ; i++ ) {
 			if ((tabelaEleitores[i].listaVazia()!=true)) { 
-			tabelaEleitores[i].imprimir();
+				tabelaEleitores[i].imprimirDadosCartao();
 			}
 		}
 		
+	}
+	
+	public void imprimirEleitoresEmLinha(){
+		
+		String listaTabelaEleitores = "";
+		for(int i=0 ; i < M ; i++ ) {
+			if ((tabelaEleitores[i].listaVazia()!=true)) { 
+				listaTabelaEleitores += tabelaEleitores[i].retornarDadosLinha();
+			}
+		}
+		
+		JOptionPane.showMessageDialog(null, listaTabelaEleitores);
 	}
 		
 		

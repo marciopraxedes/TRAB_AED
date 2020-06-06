@@ -1,23 +1,25 @@
-package br.gov.urnaeletronica.resources;
+package br.gov.urnaeletronica.resources.eleitor.partidopolitico;
 
-import br.gov.tre.models.Eleitor;
+import javax.swing.JOptionPane;
 
-public class ListaEleitor {
+import br.gov.tre.models.PartidoPolitico;
 
-	private CelulaEleitor primeiro; 
+public class ListaPartidoPolitico {
+
+	private CelulaPartidoPolitico primeiro; 
     								
-	private CelulaEleitor ultimo;  
+	private CelulaPartidoPolitico ultimo;  
 
 
-	public ListaEleitor()
+	public ListaPartidoPolitico()
 	{
-		primeiro = new CelulaEleitor();
+		primeiro = new CelulaPartidoPolitico();
 		ultimo = primeiro;
 	}
 
-	public void inserirFinal(Eleitor novoEleitor)
+	public void inserirFinal(PartidoPolitico novoEleitor)
 	{
-		CelulaEleitor aux = new CelulaEleitor();
+		CelulaPartidoPolitico aux = new CelulaPartidoPolitico();
 
 		ultimo.proximo = aux;
 
@@ -26,9 +28,9 @@ public class ListaEleitor {
 		ultimo = ultimo.proximo;
 	}
 
-    public Eleitor retirar(long numeroTitulo)
+    public PartidoPolitico retirar(String nomePartido)
     {
-        CelulaEleitor aux, anterior;
+        CelulaPartidoPolitico aux, anterior;
 
 
         anterior = primeiro;
@@ -40,7 +42,7 @@ public class ListaEleitor {
         while (aux != null)
         {
 
-            if (aux.item.getNumeroTitulo() == numeroTitulo)
+            if (aux.item.getNome() == nomePartido)
             {
 
                 anterior.proximo = aux.proximo;
@@ -62,16 +64,15 @@ public class ListaEleitor {
         return null;
     }
     
-
-    public Eleitor localizar(long numeroTitulo)
+    public PartidoPolitico localizar(String nomePartido)
     {
-        CelulaEleitor aux;
+        CelulaPartidoPolitico aux;
 
         aux = primeiro.proximo;
 
         while (aux != null)
         {
-            if (aux.item.getNumeroTitulo() == numeroTitulo)
+            if (aux.item.getNome() == nomePartido)
             {
                 return aux.item;
             }
@@ -83,10 +84,10 @@ public class ListaEleitor {
         return null;
     }
     
-    public Eleitor retornarItem(){
+    public PartidoPolitico retornarItem(){
     
-        CelulaEleitor aux;
-        Eleitor eleitor = null;
+        CelulaPartidoPolitico aux;
+        PartidoPolitico eleitor = null;
 
         aux = primeiro.proximo;
 
@@ -110,9 +111,9 @@ public class ListaEleitor {
         }
     }
 
-    public void imprimir()
+    public void imprimirIndividualmente()
     {
-        CelulaEleitor aux;
+        CelulaPartidoPolitico aux;
 
         aux = primeiro.proximo;
 
@@ -124,10 +125,33 @@ public class ListaEleitor {
         {
             while (aux != null)
             {
-                aux.item.exibirDados();                
+                aux.item.imprimirDados();                
                 aux = aux.proximo;
             }
         }
+    }
+    
+    public void imprimirTodosDados()
+    {
+        CelulaPartidoPolitico aux;
+        
+        String dadosEmLinha = "";
+
+        aux = primeiro.proximo;
+
+        if (aux == null)
+        {
+            System.out.println("A lista de produtos est� vazia.");
+        }
+        else
+        {
+            while (aux != null)
+            {
+            	dadosEmLinha += aux.item.retornarDadosImpressao() +"\n";                
+                aux = aux.proximo;
+            }
+        }
+        JOptionPane.showMessageDialog(null, dadosEmLinha);
     }    
 
     
