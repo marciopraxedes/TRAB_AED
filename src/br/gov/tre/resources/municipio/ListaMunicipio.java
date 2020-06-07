@@ -1,25 +1,25 @@
-package br.gov.urnaeletronica.resources.eleitor.partidopolitico;
+package br.gov.tre.resources.municipio;
 
 import javax.swing.JOptionPane;
 
-import br.gov.tre.models.PartidoPolitico;
+import br.gov.tre.models.Municipio;
 
-public class ListaPartidoPolitico {
+public class ListaMunicipio {
 
-	private CelulaPartidoPolitico primeiro; 
+	private CelulaMunicipio primeiro; 
     								
-	private CelulaPartidoPolitico ultimo;  
+	private CelulaMunicipio ultimo;  
 
 
-	public ListaPartidoPolitico()
+	public ListaMunicipio()
 	{
-		primeiro = new CelulaPartidoPolitico();
+		primeiro = new CelulaMunicipio();
 		ultimo = primeiro;
 	}
 
-	public void inserirFinal(PartidoPolitico novoEleitor)
+	public void inserirFinal(Municipio novoEleitor)
 	{
-		CelulaPartidoPolitico aux = new CelulaPartidoPolitico();
+		CelulaMunicipio aux = new CelulaMunicipio();
 
 		ultimo.proximo = aux;
 
@@ -28,9 +28,9 @@ public class ListaPartidoPolitico {
 		ultimo = ultimo.proximo;
 	}
 
-    public PartidoPolitico retirar(String nomePartido)
+    public Municipio retirar(String nomePartido)
     {
-        CelulaPartidoPolitico aux, anterior;
+        CelulaMunicipio aux, anterior;
 
 
         anterior = primeiro;
@@ -64,9 +64,9 @@ public class ListaPartidoPolitico {
         return null;
     }
     
-    public PartidoPolitico localizar(String nomePartido)
+    public Municipio localizar(String nomePartido)
     {
-        CelulaPartidoPolitico aux;
+        CelulaMunicipio aux;
 
         aux = primeiro.proximo;
 
@@ -84,10 +84,10 @@ public class ListaPartidoPolitico {
         return null;
     }
     
-    public PartidoPolitico retornarItem(){
+    public Municipio retornarItem(){
     
-        CelulaPartidoPolitico aux;
-        PartidoPolitico eleitor = null;
+        CelulaMunicipio aux;
+        Municipio eleitor = null;
 
         aux = primeiro.proximo;
 
@@ -113,7 +113,7 @@ public class ListaPartidoPolitico {
 
     public void imprimirIndividualmente()
     {
-        CelulaPartidoPolitico aux;
+        CelulaMunicipio aux;
 
         aux = primeiro.proximo;
 
@@ -133,7 +133,7 @@ public class ListaPartidoPolitico {
     
     public void imprimirTodosDados()
     {
-        CelulaPartidoPolitico aux;
+        CelulaMunicipio aux;
         
         String dadosEmLinha = "";
 

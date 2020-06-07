@@ -5,9 +5,11 @@ import java.io.*;
 import javax.swing.JOptionPane;
 
 import br.gov.tre.models.Eleitor;
+import br.gov.tre.models.Municipio;
 import br.gov.tre.models.PartidoPolitico;
-import br.gov.urnaeletronica.resources.eleitor.TabelaHashEleitor;
-import br.gov.urnaeletronica.resources.eleitor.partidopolitico.ListaPartidoPolitico;
+import br.gov.tre.resources.eleitor.TabelaHashEleitor;
+import br.gov.tre.resources.municipio.ListaMunicipio;
+import br.gov.tre.resources.partidopolitico.ListaPartidoPolitico;
 
 public class ArquivoTexto {
 
@@ -198,6 +200,49 @@ public class ArquivoTexto {
 		return tabelaEleitor;
 	}
 	
+	
+	public ListaMunicipio lerDadosMunicipios() {
+
+		int cont = qtdDados();
+		ListaMunicipio tabelaMunicipio = new ListaMunicipio();
+
+		try {
+			for (int index = 0 ; index < cont ; index++) {
+
+				//CONVERTE CADA LINHA EM UM VETOR DE STRING
+				String arrayConversor[];
+				arrayConversor = entrada.readLine().split(";");
+
+				//ARMAZEVA E CONVERTE O VALOR DE CADA POSICAO DO VETOR EM UMA VARIAVEL
+				Municipio novoMunicipio = new Municipio();
+				novoMunicipio.setNome(arrayConversor[0]); 
+				novoMunicipio.setEstado(arrayConversor[1]);
+				novoMunicipio.setNumeroHabitantes(Integer.parseInt(arrayConversor[2]));
+				novoMunicipio.setVagasVereador(Integer.parseInt(arrayConversor[3]));
+
+				//INSERE UM NOVO MUNICIPIO. SE RETORNAR -1, MUNICIPIO JA EXITE
+				tabelaMunicipio.inserirFinal(novoMunicipio);
+									
+			}			
+			retornarInicioArquivo();		
+
+		}
+
+
+		catch (EOFException excecao) { //Exceção  de final de arquivo.
+			System.out.println("Fim de arquivo." + excecao);
+
+		}
+		catch (IOException excecao) {
+			System.out.println("Erro de leitura: " + excecao);
+		}
+
+		catch (NumberFormatException excecao) {
+			System.out.println("\nERROR - N�o � n�mero" + excecao + "\n");
+		}
+
+		return tabelaMunicipio;
+	}
 /*
 	public void alterarEleitor (long numeroTitulo) {
 		int opcao = 0;
@@ -230,7 +275,7 @@ public class ArquivoTexto {
 		ArquivoTexto arquivo = new ArquivoTexto();
 		arquivo.criarArquivoTemporario(nomeArquivoLocal);
 
-		TabelaHashPartidoPolitico tabelaEleitor = new TabelaHashPartidoPolitico(cont);
+		TabelaHashMunicipio tabelaEleitor = new TabelaHashMunicipio(cont);
 		String arrayConversor[];
 
 		try {

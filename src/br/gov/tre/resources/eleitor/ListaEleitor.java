@@ -1,4 +1,4 @@
-package br.gov.urnaeletronica.resources.eleitor;
+package br.gov.tre.resources.eleitor;
 
 import br.gov.tre.models.Eleitor;
 

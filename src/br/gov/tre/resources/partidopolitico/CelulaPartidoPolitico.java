@@ -1,5 +1,4 @@
-package br.gov.urnaeletronica.resources.eleitor.partidopolitico;
-
+package br.gov.tre.resources.partidopolitico;
 import br.gov.tre.models.PartidoPolitico;
 
 public class CelulaPartidoPolitico {

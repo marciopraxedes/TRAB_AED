@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
 encoding//src/br/gov/tre/Application.java=UTF-8
+encoding//src/br/gov/tre/resources/Municipio/ListaMunicipio.java=UTF-8
+encoding//src/br/gov/tre/resources/eleitor/ListaEleitor.java=UTF-8
+encoding//src/br/gov/tre/resources/eleitor/TabelaHashEleitor.java=UTF-8
+encoding//src/br/gov/tre/resources/municipio/ListaMunicipio.java=UTF-8
+encoding//src/br/gov/tre/resources/partidopolitico/ListaPartidoPolitico.java=UTF-8
 encoding//src/br/gov/urnaeletronica/resources/ArquivoTexto.java=UTF-8
-encoding//src/br/gov/urnaeletronica/resources/eleitor/ListaEleitor.java=UTF-8
-encoding//src/br/gov/urnaeletronica/resources/eleitor/TabelaHashEleitor.java=UTF-8
-encoding//src/br/gov/urnaeletronica/resources/eleitor/partidopolitico/ListaPartidoPolitico.java=UTF-8
