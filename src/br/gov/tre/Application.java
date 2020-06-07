@@ -3,14 +3,18 @@ package br.gov.tre;
 import javax.swing.JOptionPane;
 
 import br.gov.tre.resources.eleitor.TabelaHashEleitor;
-import br.gov.tre.resources.Municipio.ListaMunicipio;
+import br.gov.tre.resources.municipio.ListaMunicipio;
+import br.gov.tre.resources.partidopolitico.ListaPartidoPolitico;
+import br.gov.tre.resources.urna.ListaUrnaEletronica;
 import br.gov.urnaeletronica.resources.ArquivoTexto;
 
 public class Application {
 
 	private static ArquivoTexto bancoDados = new ArquivoTexto();
 	private static TabelaHashEleitor tabelaEleitores;
-	private static ListaMunicipio listaPartidosPoliticos;
+	private static ListaPartidoPolitico listaPartidosPoliticos;
+	private static ListaMunicipio listaMunicipios;
+	private static ListaUrnaEletronica listaUrnasEletronicas;
 	private static String arquivoEleitores = "eleitores"; //JOptionPane.showInputDialog(null, "Digite o nome do 'eleitores'");	
 	private static String arquivoCandidatos = "candidatos";
 	private static String arquivoPartidosPoliticos = "partidosPoliticos";
@@ -94,13 +98,17 @@ public class Application {
 			case 1:
 				System.out.println("Cadastro de partidos políticos");
 				bancoDados.abrirArquivo(arquivoPartidosPoliticos+".txt");
-				listaPartidosPoliticos = bancoDados.lerDadosMunicipio();
+				listaPartidosPoliticos = bancoDados.lerDadosPartidoPolitico();
 				listaPartidosPoliticos.imprimirTodosDados();
 				bancoDados.fecharArquivo();				
 				break;
 
 			case 2:
-
+				System.out.println("Cadastro de municipios");
+				bancoDados.abrirArquivo(arquivoMunicipios+".txt");
+				listaMunicipios = bancoDados.lerDadosMunicipios();
+				listaMunicipios.imprimirTodosDados();
+				bancoDados.fecharArquivo();			
 				break;
 
 			case 3:
@@ -114,7 +122,10 @@ public class Application {
 				bancoDados.fecharArquivo();
 				break;
 			case 5:
-
+				bancoDados.abrirArquivo(arquivoUrnasEletronicas+".txt");
+				listaUrnasEletronicas = bancoDados.lerDadosUrnasEletronicas();	
+				listaUrnasEletronicas.imprimirTodosDados();
+				bancoDados.fecharArquivo();
 				break;
 
 			case 6:
@@ -124,8 +135,6 @@ public class Application {
 
 				break;
 			}
-
-
 
 		}		
 

@@ -7,9 +7,11 @@ import javax.swing.JOptionPane;
 import br.gov.tre.models.Eleitor;
 import br.gov.tre.models.Municipio;
 import br.gov.tre.models.PartidoPolitico;
+import br.gov.tre.models.UrnaEletronica;
 import br.gov.tre.resources.eleitor.TabelaHashEleitor;
 import br.gov.tre.resources.municipio.ListaMunicipio;
 import br.gov.tre.resources.partidopolitico.ListaPartidoPolitico;
+import br.gov.tre.resources.urna.ListaUrnaEletronica;
 
 public class ArquivoTexto {
 
@@ -243,6 +245,48 @@ public class ArquivoTexto {
 
 		return tabelaMunicipio;
 	}
+	public ListaUrnaEletronica lerDadosUrnasEletronicas() {
+
+		int cont = qtdDados();
+		ListaUrnaEletronica listaUrnaEletronica = new ListaUrnaEletronica();
+
+		try {
+			for (int index = 0 ; index < cont ; index++) {
+
+				//CONVERTE CADA LINHA EM UM VETOR DE STRING
+				String arrayConversor[];
+				arrayConversor = entrada.readLine().split(";");
+
+				//ARMAZEVA E CONVERTE O VALOR DE CADA POSICAO DO VETOR EM UMA VARIAVEL
+				UrnaEletronica novaUrnaEletronica = new UrnaEletronica();
+				novaUrnaEletronica.setMunicipio(arrayConversor[0]); 
+				novaUrnaEletronica.setZonaEleitoral(Integer.parseInt(arrayConversor[1]));
+				novaUrnaEletronica.setSecaoEleitoral(Integer.parseInt(arrayConversor[2]));
+
+				//INSERE UMA NOVA PESSOA. SE RETORNAR -1, PESSOA J� EXITE
+				listaUrnaEletronica.inserirFinal(novaUrnaEletronica);
+									
+			}			
+			retornarInicioArquivo();		
+
+		}
+
+
+		catch (EOFException excecao) { //Exce��o de final de arquivo.
+			System.out.println("Fim de arquivo." + excecao);
+
+		}
+		catch (IOException excecao) {
+			System.out.println("Erro de leitura: " + excecao);
+		}
+
+		catch (NumberFormatException excecao) {
+			System.out.println("\nERROR - N�o � n�mero" + excecao + "\n");
+		}
+
+		return listaUrnaEletronica;
+	}
+	
 /*
 	public void alterarEleitor (long numeroTitulo) {
 		int opcao = 0;

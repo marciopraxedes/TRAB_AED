@@ -1,36 +1,37 @@
-package br.gov.tre.resources.municipio;
+package br.gov.tre.resources.urna;
 
 import javax.swing.JOptionPane;
 
-import br.gov.tre.models.Municipio;
-
-public class ListaMunicipio {
-
-	private CelulaMunicipio primeiro; 
-    								
-	private CelulaMunicipio ultimo;  
+import br.gov.tre.models.UrnaEletronica;
 
 
-	public ListaMunicipio()
+public class ListaUrnaEletronica {
+	
+	private CelulaUrnaEletronica primeiro; 
+	
+	private CelulaUrnaEletronica ultimo;  
+
+
+	public ListaUrnaEletronica()
 	{
-		primeiro = new CelulaMunicipio();
+		primeiro = new CelulaUrnaEletronica();
 		ultimo = primeiro;
 	}
 
-	public void inserirFinal(Municipio novoEleitor)
+	public void inserirFinal(UrnaEletronica novaUrnaEletronica)
 	{
-		CelulaMunicipio aux = new CelulaMunicipio();
+		CelulaUrnaEletronica aux = new CelulaUrnaEletronica();
 
 		ultimo.proximo = aux;
 
-		aux.item = novoEleitor;
+		aux.item = novaUrnaEletronica;
 
 		ultimo = ultimo.proximo;
 	}
-
-    public Municipio retirar(String nomePartido)
+/*
+    public UrnaEletronica retirar(String urnaEletronica)
     {
-        CelulaMunicipio aux, anterior;
+    	CelulaUrnaEletronica aux, anterior;
 
 
         anterior = primeiro;
@@ -42,7 +43,7 @@ public class ListaMunicipio {
         while (aux != null)
         {
 
-            if (aux.item.getNome() == nomePartido)
+            if (aux.item.getNome() == urnaEletronica)
             {
 
                 anterior.proximo = aux.proximo;
@@ -64,9 +65,9 @@ public class ListaMunicipio {
         return null;
     }
     
-    public Municipio localizar(String nomePartido)
+    public PartidoPolitico localizar(String nomePartido)
     {
-        CelulaMunicipio aux;
+        CelulaPartidoPolitico aux;
 
         aux = primeiro.proximo;
 
@@ -83,20 +84,20 @@ public class ListaMunicipio {
         }
         return null;
     }
+    */
+    public UrnaEletronica retornarItem(){
     
-    public Municipio retornarItem(){
-    
-        CelulaMunicipio aux;
-        Municipio eleitor = null;
+        CelulaUrnaEletronica aux;
+        UrnaEletronica urnaEletronica = null;
 
         aux = primeiro.proximo;
 
         while (aux != null)
         {		
-        	eleitor = aux.item;
+        	urnaEletronica = aux.item;
             aux = aux.proximo;
             }
-        return eleitor;
+        return urnaEletronica;
         }
         
     public Boolean listaVazia()
@@ -113,7 +114,7 @@ public class ListaMunicipio {
 
     public void imprimirIndividualmente()
     {
-        CelulaMunicipio aux;
+        CelulaUrnaEletronica aux;
 
         aux = primeiro.proximo;
 
@@ -133,7 +134,7 @@ public class ListaMunicipio {
     
     public void imprimirTodosDados()
     {
-        CelulaMunicipio aux;
+        CelulaUrnaEletronica aux;
         
         String dadosEmLinha = "";
 
@@ -141,7 +142,7 @@ public class ListaMunicipio {
 
         if (aux == null)
         {
-            System.out.println("A lista de produtos está vazia.");
+            System.out.println("A lista de produtos est� vazia.");
         }
         else
         {
@@ -153,6 +154,4 @@ public class ListaMunicipio {
         }
         JOptionPane.showMessageDialog(null, dadosEmLinha);
     }    
-
-    
 }
