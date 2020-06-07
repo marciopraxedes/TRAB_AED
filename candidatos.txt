@@ -1,0 +1,6 @@
+Paulo Henrique; 22; Belo Horizonte; PCU; P
+Izabella; 45; Belo Horizonte; Ptralha; V
+Juana; 46; Contagem; PCU; V
+Ronadinho Gaucho; 69; Contagem; PSDB; P
+Cristoph; 78; Belo Horizonte; PCU; P
+Creusa; 100; Belo Horizonte; Ptralha; V

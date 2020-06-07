@@ -2,15 +2,17 @@ package br.gov.tre;
 
 import javax.swing.JOptionPane;
 
+import br.gov.resources.candidato.TabelaHashCandidato;
 import br.gov.tre.resources.eleitor.TabelaHashEleitor;
-import br.gov.tre.resources.Municipio.ListaMunicipio;
+//import br.gov.tre.resources.Municipio.ListaMunicipio;
 import br.gov.urnaeletronica.resources.ArquivoTexto;
 
 public class Application {
 
 	private static ArquivoTexto bancoDados = new ArquivoTexto();
 	private static TabelaHashEleitor tabelaEleitores;
-	private static ListaMunicipio listaPartidosPoliticos;
+	private static TabelaHashCandidato tabelaCandidatos;
+//	private static ListaMunicipio listaPartidosPoliticos;
 	private static String arquivoEleitores = "eleitores"; //JOptionPane.showInputDialog(null, "Digite o nome do 'eleitores'");	
 	private static String arquivoCandidatos = "candidatos";
 	private static String arquivoPartidosPoliticos = "partidosPoliticos";
@@ -92,19 +94,22 @@ public class Application {
 
 			switch(selecionarAcao) {
 			case 1:
-				System.out.println("Cadastro de partidos políticos");
-				bancoDados.abrirArquivo(arquivoPartidosPoliticos+".txt");
-				listaPartidosPoliticos = bancoDados.lerDadosMunicipio();
-				listaPartidosPoliticos.imprimirTodosDados();
-				bancoDados.fecharArquivo();				
+//				System.out.println("Cadastro de partidos políticos");
+//				bancoDados.abrirArquivo(arquivoPartidosPoliticos+".txt");
+//				listaPartidosPoliticos = bancoDados.lerDadosMunicipio();
+//				listaPartidosPoliticos.imprimirTodosDados();
+//				bancoDados.fecharArquivo();				
 				break;
 
 			case 2:
-
+				
 				break;
 
 			case 3:
-
+				bancoDados.abrirArquivo(arquivoCandidatos+".txt");
+				tabelaCandidatos = bancoDados.lerDadosCandidatos();	
+				tabelaCandidatos.imprimirCandidatosEmLinha();
+				bancoDados.fecharArquivo();
 				break;
 
 			case 4:

@@ -4,6 +4,8 @@ import java.io.*;
 
 import javax.swing.JOptionPane;
 
+import br.gov.resources.candidato.TabelaHashCandidato;
+import br.gov.tre.models.Candidato;
 import br.gov.tre.models.Eleitor;
 import br.gov.tre.models.Municipio;
 import br.gov.tre.models.PartidoPolitico;
@@ -123,7 +125,7 @@ public class ArquivoTexto {
 
 				//CONVERTE CADA LINHA EM UM VETOR DE STRING
 				String arrayConversor[];
-				arrayConversor = entrada.readLine().split(";");
+				arrayConversor = entrada.readLine().replace("; ", ";").split(";");
 
 				//ARMAZEVA E CONVERTE O VALOR DE CADA POSICAO DO VETOR EM UMA VARIAVEL
 				Eleitor novoEleitor = new Eleitor();
@@ -157,6 +159,52 @@ public class ArquivoTexto {
 		}
 
 		return tabelaEleitor;
+	}
+	
+	public TabelaHashCandidato lerDadosCandidatos() {
+
+		int cont = qtdDados();
+		TabelaHashCandidato tabelaCandidato = new TabelaHashCandidato(cont);
+
+		try {
+			for (int index = 0 ; index < cont ; index++) {
+
+				//CONVERTE CADA LINHA EM UM VETOR DE STRING
+				String arrayConversor[];
+				arrayConversor = entrada.readLine().replace("; ", ";").split(";");
+
+				//ARMAZEVA E CONVERTE O VALOR DE CADA POSICAO DO VETOR EM UMA VARIAVEL
+				Candidato novoCandidato = new Candidato();
+				novoCandidato.setNome(arrayConversor[0]); 
+				novoCandidato.setNumero(Integer.valueOf(arrayConversor[1]));
+				novoCandidato.setMunicipio(arrayConversor[2]);
+				novoCandidato.setPartidoPolitico(arrayConversor[3]);
+				novoCandidato.setCargo(arrayConversor[4].charAt(0));
+
+				//INSERE UMA NOVA PESSOA. SE RETORNAR -1, PESSOA J� EXITE
+				if((tabelaCandidato.inserirCandidato(novoCandidato) == -1)) {
+					JOptionPane.showMessageDialog(null,"Erro ao carregar dados. \nOs dados do eleitor já foram carregados");
+					break;
+				}					
+			}			
+			retornarInicioArquivo();		
+
+		}
+
+
+		catch (EOFException excecao) { //Exce��o de final de arquivo.
+			System.out.println("Fim de arquivo." + excecao);
+
+		}
+		catch (IOException excecao) {
+			System.out.println("Erro de leitura: " + excecao);
+		}
+
+		catch (NumberFormatException excecao) {
+			System.out.println("\nERROR - N�o � n�mero" + excecao + "\n");
+		}
+
+		return tabelaCandidato;
 	}
 	
 	public ListaPartidoPolitico lerDadosPartidoPolitico() {
