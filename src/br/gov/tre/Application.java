@@ -2,19 +2,25 @@ package br.gov.tre;
 
 import javax.swing.JOptionPane;
 
+import br.gov.resources.candidato.TabelaHashCandidato;
 import br.gov.tre.resources.eleitor.TabelaHashEleitor;
+
 import br.gov.tre.resources.municipio.ListaMunicipio;
 import br.gov.tre.resources.partidopolitico.ListaPartidoPolitico;
 import br.gov.tre.resources.urna.ListaUrnaEletronica;
+
 import br.gov.urnaeletronica.resources.ArquivoTexto;
 
 public class Application {
 
 	private static ArquivoTexto bancoDados = new ArquivoTexto();
+	
 	private static TabelaHashEleitor tabelaEleitores;
 	private static ListaPartidoPolitico listaPartidosPoliticos;
 	private static ListaMunicipio listaMunicipios;
 	private static ListaUrnaEletronica listaUrnasEletronicas;
+	private static TabelaHashCandidato tabelaCandidatos;
+
 	private static String arquivoEleitores = "eleitores"; //JOptionPane.showInputDialog(null, "Digite o nome do 'eleitores'");	
 	private static String arquivoCandidatos = "candidatos";
 	private static String arquivoPartidosPoliticos = "partidosPoliticos";
@@ -109,10 +115,14 @@ public class Application {
 				listaMunicipios = bancoDados.lerDadosMunicipios();
 				listaMunicipios.imprimirTodosDados();
 				bancoDados.fecharArquivo();			
+			
 				break;
 
 			case 3:
-
+				bancoDados.abrirArquivo(arquivoCandidatos+".txt");
+				tabelaCandidatos = bancoDados.lerDadosCandidatos();	
+				tabelaCandidatos.imprimirCandidatosEmLinha();
+				bancoDados.fecharArquivo();
 				break;
 
 			case 4:

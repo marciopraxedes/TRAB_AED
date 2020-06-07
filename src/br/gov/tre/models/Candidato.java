@@ -1,5 +1,60 @@
 package br.gov.tre.models;
 
-public class Candidato {
+import javax.swing.JOptionPane;
 
+public class Candidato extends Pessoa{
+	private int numero;
+	private String partidoPolitico;
+	private char cargo;
+	
+	public Candidato() {
+		super();
+	}
+	
+	public  Candidato(String nome, int numero, String municipio, String partidoPolitico, char cargo) { 
+		super(nome, municipio);
+		this.numero = numero;
+		this.partidoPolitico = partidoPolitico;
+		this.cargo = cargo;
+	}
+
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+
+	public String getPartidoPolitico() {
+		return partidoPolitico;
+	}
+
+	public void setPartidoPolitico(String partidoPolitico) {
+		this.partidoPolitico = partidoPolitico;
+	}
+
+	public char getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(char cargo) {
+		this.cargo = cargo;
+	}
+	
+	public void imprimirDados() {
+		JOptionPane.showMessageDialog(null, "Nome do candidato: " + super.getNome() + 
+				"\nN�mero do t�tulo: " + getNumero() +
+				"\nMunic�pio: " + super.getMunicipio() + 
+				"\nPartido Politico: " + getPartidoPolitico() +
+				"\nCargo: " + getCargo());
+	}
+	
+	public String retornarDadosImpressao() {
+		return "Nome do candidato: " + super.getNome() + 
+				"\nN�mero do t�tulo: " + getNumero() +
+				"\nMunic�pio: " + super.getMunicipio() + 
+				"\nPartido Politico: " + getPartidoPolitico() +
+				"\nCargo: " + getCargo();		 
+	}
 }
