@@ -13,6 +13,7 @@ import br.gov.urnaeletronica.resources.votacao.ListaVoto;
 public class Application {
 	
 	private static ArquivoTexto bancoDados = new ArquivoTexto();
+	private static String nomeArquivoEleitores = "eleitores";
 	
 	private static ConfigUrnaEletronica configUrnaEletronica = null;
 
@@ -51,6 +52,21 @@ public class Application {
 
 				case 3:
 					System.out.println("Justificar Ausência");
+					int numeroTitulo = Integer.parseInt(JOptionPane.showInputDialog(null,
+							"Justificar Ausência" + "\n\nDigite o número do titulo:"));
+					if (configUrnaEletronica != null) {						
+						justificarAusencia(numeroTitulo);
+					}
+					else {
+						int selecionar = Integer.parseInt(JOptionPane.showInputDialog(null,
+								"A urna não foi configurada." + "\n\nDeseja configurar a urna?" + "\n\n'1' SIM  -  '2' NÃO"));
+						System.out.println("A urna não foi configurada.");
+
+						if (selecionar == 1) {
+							configurarUrna();
+							justificarAusencia(numeroTitulo);
+						}
+					}
 					break;
 					
 				case 4:
@@ -107,7 +123,7 @@ public class Application {
 				}
 				else {
 					System.out.println("Eleitor já votou");
-					JOptionPane.showInputDialog(null, "Eleitor já votou");
+					JOptionPane.showMessageDialog(null, "Eleitor já votou");
 				}
 			}
 			else {
@@ -145,43 +161,90 @@ public class Application {
 	
 	private static boolean verificarSeJaVotou(long numeroTitulo, String arquivoPresenca) {
 
-		bancoDados.abrirArquivo(arquivoPresenca);
+		bancoDados.abrirCriarArquivo("dadosUrnas\\PresencaEleitores\\" + Integer.toString(configUrnaEletronica.getId()));
 		TabelaHashEleitor tabelaHashEleitores = bancoDados.lerDadosEleitores();
-		Eleitor eleitor = tabelaHashEleitores.pesquisarEleitor(numeroTitulo);
 		
-		if(eleitor != null ) {
-			return true;
+		if(tabelaHashEleitores !=null) {
+			Eleitor eleitor = tabelaHashEleitores.pesquisarEleitor(numeroTitulo);
+			
+			if(eleitor != null ) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
-		else {
-			return false;
-		}
+		return false;
 		
 	}
 	
 	private static void justificarAusencia(long numeroTitulo) {
+
 		
-	}
+		if(!verificarSeJaVotou(numeroTitulo, "dadosUrnas\\PresencaEleitores\\" + Integer.toString(configUrnaEletronica.getId()))) {
+			
+			bancoDados.abrirCriarArquivo("dadosUrnas\\JustificarAusencia\\" + Integer.toString(configUrnaEletronica.getId()));
+			
+			ArquivoTexto arquivoEleitores = new ArquivoTexto();
+			
+			arquivoEleitores.abrirArquivo(nomeArquivoEleitores);
+			
+			TabelaHashEleitor tabelaHashEleitores = arquivoEleitores.lerDadosEleitores();
+			
+			arquivoEleitores.fecharArquivo();
+			
+			Eleitor eleitor = tabelaHashEleitores.pesquisarEleitor(numeroTitulo);
+			
+			if(eleitor.getSecaoEleitoral() == configUrnaEletronica.getSecaoEleitoral() && eleitor.getZonaEleitoral() == configUrnaEletronica.getZonaEleitoral()) {
+				System.out.println("Este eleitor não pode justificar o voto aqui.");
+				JOptionPane.showMessageDialog(null, "O eleitor "+eleitor.getNome() +" está presente na Zona e Seção eleitoral vinculada à ele. Deve realizar o voto.");
+			}
+			else {
+				
+				String entradaDados = eleitor.getNome() + ";" + eleitor.getNumeroTitulo() + ";"	+ eleitor.getMunicipio() + ";"
+						+ eleitor.getZonaEleitoral() + ";" + eleitor.getSecaoEleitoral();
+				
+				bancoDados.escrever(entradaDados);
+				bancoDados.fecharArquivo();
+
+				System.out.println("Justificativa de Ausência do eleitor registrada com sucesso!");
+				JOptionPane.showMessageDialog(null, "Justificativa de Ausência do eleitor "+eleitor.getNome() +" registrada com sucesso!");
+
+			}
+		}else {
+			System.out.println("Eleitor já votou");
+			JOptionPane.showMessageDialog(null, "Eleitor já votou");
+		}
+		
+}
 	
 	private static void realizarVoto(long numeroTitulo) {
 		
 		boolean candidatoValido;
-		int numeroCandidato;
+		int numeroCandidatoPrefeito;
+		int numeroCandidatoVereador;
 		
 		do {
-			numeroCandidato = Integer.parseInt(JOptionPane.showInputDialog(null, "Escolha do candidato."
+			numeroCandidatoPrefeito = Integer.parseInt(JOptionPane.showInputDialog(null, "Escolha do candidato para Prefeito."
 					+ "\n\nDigite o número do candidato"));
-			candidatoValido = verificaCadidatoValido(numeroCandidato);			
+			candidatoValido = verificaCadidatoPrefeitoValido(numeroCandidatoPrefeito);			
+			
+		} while(!candidatoValido);
+		
+		do {
+			numeroCandidatoVereador = Integer.parseInt(JOptionPane.showInputDialog(null, "Escolha do candidato para Vereador."
+					+ "\n\nDigite o número do candidato"));
+			candidatoValido = verificaCadidatoVereadorValido(numeroCandidatoVereador);			
 			
 		} while(!candidatoValido);
 		
 		//abrir arquivo de votos
 		bancoDados.abrirArquivo("dadosUrnas\\Votos\\" + Integer.toString(configUrnaEletronica.getId()));
 		//instanciar a lista de votos
-		ListaVoto listaVotos = bancoDados.lerDadosVotos();
-		
+		ListaVoto listaVotos = bancoDados.lerDadosVotos();		
 		bancoDados.fecharArquivo();
 		
-		if(listaVotos.atualizarVotosCandidato(numeroCandidato)) {
+		if(listaVotos.atualizarVotosCandidato(numeroCandidatoPrefeito) && listaVotos.atualizarVotosCandidato(numeroCandidatoVereador)) {
 			
 			bancoDados.criarArquivo("dadosUrnas\\Votos\\" + Integer.toString(configUrnaEletronica.getId()));
 			bancoDados.atualizarVotos(listaVotos);
@@ -199,18 +262,33 @@ public class Application {
 		
 	}
 	
-	private static boolean verificaCadidatoValido(int numeroCandidato) {
-		if(configUrnaEletronica.getTabelaCandidatos().pesquisarCandidato(numeroCandidato) != null) {
+	private static boolean verificaCadidatoPrefeitoValido(int numeroCandidato) {
+		if(configUrnaEletronica.getTabelaCandidatos().pesquisarCandidato(numeroCandidato) != null
+				& configUrnaEletronica.getTabelaCandidatos().pesquisarCandidato(numeroCandidato).getCargo() == 'P') {
 			return true;
 		}
 		else {
+			JOptionPane.showMessageDialog(null, "Prefeiro não existe");
 			return false;
 		}
 	}
 	
+	private static boolean verificaCadidatoVereadorValido(int numeroCandidato) {
+		if(configUrnaEletronica.getTabelaCandidatos().pesquisarCandidato(numeroCandidato) != null 
+				&& configUrnaEletronica.getTabelaCandidatos().pesquisarCandidato(numeroCandidato).getCargo() == 'V') {
+			return true;
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Vereador não existe");
+			return false;
+		}
+	}
+	
+	
+	
 	private static void registrarPresencaEleitor(long numeroTitulo) {
 		
-		bancoDados.abrirCriarArquivo("dadosUrnas\\PresencaEleitores\\" + configUrnaEletronica.getId());
+		bancoDados.abrirCriarArquivo("dadosUrnas\\PresencaEleitores\\" + Integer.toString(configUrnaEletronica.getId()));
 		String eleitor = configUrnaEletronica.getTabelaEleitores().pesquisarEleitor(numeroTitulo).getNome() + ";"
 				+configUrnaEletronica.getTabelaEleitores().pesquisarEleitor(numeroTitulo).getNumeroTitulo() + ";"
 				+configUrnaEletronica.getTabelaEleitores().pesquisarEleitor(numeroTitulo).getMunicipio() + ";"

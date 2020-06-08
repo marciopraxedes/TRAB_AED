@@ -167,32 +167,37 @@ public class ArquivoTexto {
 	public TabelaHashEleitor lerDadosEleitores() {
 
 		int cont = qtdDados();
-		TabelaHashEleitor tabelaEleitor = new TabelaHashEleitor(cont);
+		System.out.println("cont: "+cont);		
 
 		try {
-			for (int index = 0; index < cont; index++) {
+			if(cont != 0) {
+				TabelaHashEleitor tabelaEleitor = new TabelaHashEleitor(cont);
+				
+				for (int index = 0; index < cont; index++) {
 
-				// CONVERTE CADA LINHA EM UM VETOR DE STRING
-				String arrayConversor[];
-				arrayConversor = entrada.readLine().replace("; ", ";").split(";");
+					// CONVERTE CADA LINHA EM UM VETOR DE STRING
+					String arrayConversor[];
+					arrayConversor = entrada.readLine().replace("; ", ";").split(";");
 
-				// ARMAZEVA E CONVERTE O VALOR DE CADA POSICAO DO VETOR EM UMA VARIAVEL
-				Eleitor novoEleitor = new Eleitor();
-				novoEleitor.setNome(arrayConversor[0]);
-				novoEleitor.setNumeroTitulo(Long.parseLong(arrayConversor[1]));
-				novoEleitor.setMunicipio(arrayConversor[2]);
-				novoEleitor.setZonaEleitoral(Integer.valueOf(arrayConversor[3]));
-				novoEleitor.setSecaoEleitoral(Integer.valueOf(arrayConversor[4]));
+					// ARMAZEVA E CONVERTE O VALOR DE CADA POSICAO DO VETOR EM UMA VARIAVEL
+					Eleitor novoEleitor = new Eleitor();
+					novoEleitor.setNome(arrayConversor[0]);
+					novoEleitor.setNumeroTitulo(Long.parseLong(arrayConversor[1]));
+					novoEleitor.setMunicipio(arrayConversor[2]);
+					novoEleitor.setZonaEleitoral(Integer.valueOf(arrayConversor[3]));
+					novoEleitor.setSecaoEleitoral(Integer.valueOf(arrayConversor[4]));
 
-				// INSERE UMA NOVA PESSOA. SE RETORNAR -1, PESSOA J� EXITE
-				if ((tabelaEleitor.inserirEleitor(novoEleitor) == -1)) {
-					JOptionPane.showMessageDialog(null,
-							"Erro ao carregar dados. \nOs dados do eleitor já foram carregados");
-					break;
+					// INSERE UMA NOVA PESSOA. SE RETORNAR -1, PESSOA J� EXITE
+					if ((tabelaEleitor.inserirEleitor(novoEleitor) == -1)) {
+						JOptionPane.showMessageDialog(null,
+								"Erro ao carregar dados. \nOs dados do eleitor já foram carregados");
+						break;
+					}
 				}
-			}
-			retornarInicioArquivo();
-
+				retornarInicioArquivo();
+				return tabelaEleitor;
+			}	
+			
 		}
 
 		catch (EOFException excecao) { // Exce��o de final de arquivo.
@@ -206,7 +211,7 @@ public class ArquivoTexto {
 			System.out.println("\nERROR - Formato de número inválido" + excecao + "\n");
 		}
 
-		return tabelaEleitor;
+		return null;
 	}
 
 	public TabelaHashCandidato lerDadosCandidatos() {
