@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import br.gov.tre.models.Eleitor;
-import br.gov.tre.models.UrnaEletronica;
-import br.gov.tre.resources.urna.CelulaUrnaEletronica;
+
 
 public class TabelaHashEleitor {
 

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import br.gov.tre.models.Candidato;
-import br.gov.tre.models.Eleitor;
 
 public class TabelaHashCandidato {
 	private int M;

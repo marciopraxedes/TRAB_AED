@@ -3,8 +3,6 @@ package br.gov.tre.resources.eleitor;
 import java.util.ArrayList;
 
 import br.gov.tre.models.Eleitor;
-import br.gov.tre.models.UrnaEletronica;
-import br.gov.tre.resources.urna.CelulaUrnaEletronica;
 
 public class ListaEleitor {
 

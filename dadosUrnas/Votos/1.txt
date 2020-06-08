@@ -1,2 +1,4 @@
 Ronadinho Gaucho;69;Contagem;PSDB;P;0
 Juana;46;Contagem;PCU;V;0
+Ronadinho Gaucho;69;Contagem;PSDB;P;0
+Juana;46;Contagem;PCU;V;0
