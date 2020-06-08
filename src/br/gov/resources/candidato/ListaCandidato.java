@@ -163,7 +163,7 @@ public class ListaCandidato {
 
         if (aux == null)
         {
-        	System.out.println("A lista de produtos está vazia.");
+        	System.out.println("A lista de produtos estï¿½ vazia.");
         }
         else 
         {

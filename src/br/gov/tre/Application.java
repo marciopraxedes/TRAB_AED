@@ -8,7 +8,6 @@ import br.gov.tre.resources.eleitor.TabelaHashEleitor;
 import br.gov.tre.resources.municipio.ListaMunicipio;
 import br.gov.tre.resources.partidopolitico.ListaPartidoPolitico;
 import br.gov.tre.resources.urna.ListaUrnaEletronica;
-
 import br.gov.urnaeletronica.resources.ArquivoTexto;
 import br.gov.urnaeletronica.resources.ExportarDadosUrna;
 
@@ -21,6 +20,7 @@ public class Application {
 	private static ListaMunicipio listaMunicipios;
 	private static ListaUrnaEletronica listaUrnasEletronicas;
 	private static TabelaHashCandidato tabelaCandidatos;
+
 
 	private static String arquivoEleitores = "eleitores"; //JOptionPane.showInputDialog(null, "Digite o nome do 'eleitores'");	
 	private static String arquivoCandidatos = "candidatos";
@@ -61,7 +61,7 @@ public class Application {
 
 				case 3:
 					System.out.println("Etapa de 'Apuração dos Votos'");
-
+					etapaEleicao = etapaApuracao();
 					break;
 
 				case 4:
@@ -83,6 +83,43 @@ public class Application {
 		System.out.println("Aplicação encerrada.");
 
 
+	}
+	
+	private static int etapaApuracao() {
+		int selecionarAcao = 0;
+		
+		if( selecionarAcao != 4 ) {
+			selecionarAcao = Integer.parseInt(JOptionPane.showInputDialog(null, "Preparação da Eleição."
+					+ "\n\nO que deseja fazer?."
+					+ "\n\n'1' Importar resultados"
+					+ "\n'2' Listar prefeitos eleitos"
+					+ "\n'3' Listar vereadores eleitos"
+					+ "\n'4' Para SAIR"
+					+ "\n\n Informe:"));
+			switch(selecionarAcao) {
+				case 1:
+					System.out.println("Importar resultados");
+								
+					break;
+	
+				case 2:
+					System.out.println("Listar prefeitos eleitos");
+						
+				
+					break;
+	
+				case 3:
+					System.out.println("Listar vereadores eleitos");
+					break;
+				default:
+
+					break;	
+			}
+		}
+		int proximaAcao = Integer.parseInt(JOptionPane.showInputDialog(null, "Deseja voltar para menu principal?"
+				+ "\n\n'1' - SIM  -  '2' - NÃO"));
+
+		if(proximaAcao == 1) return (0); else return(4);	
 	}
 
 	private static int etapaPreparacao() {
