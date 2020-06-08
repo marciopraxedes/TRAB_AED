@@ -24,16 +24,19 @@ public class ImportarDadosUrna {
 			bancoDados.fecharArquivo();
 			
 			//obter o indice da urna selecionada que também é o mesmo nome dos arquivos de configuração Eleitor e Candidato
-			String nomeArquivo = Integer.toString(listaUrnasEletronicas.retornarIndiceItem(urnaEletronica)) + ".txt";
+			int indiceUrna = listaUrnasEletronicas.retornarIndiceItem(urnaEletronica);
 			
-			bancoDados.abrirArquivo("configUrnas\\eleitores\\" + nomeArquivo);
+			String nomeArquivo = Integer.toString(indiceUrna) + ".txt";
+			
+			bancoDados.abrirArquivo("dadosUrnas\\eleitores\\" + nomeArquivo);
 			tabelaEleitores = bancoDados.lerDadosEleitores();	
 			bancoDados.fecharArquivo();
 			
-			bancoDados.abrirArquivo("configUrnas\\Candidatos\\" + nomeArquivo);
+			bancoDados.abrirArquivo("dadosUrnas\\Candidatos\\" + nomeArquivo);
 			tabelaCandidatos = bancoDados.lerDadosCandidatos();	
 			bancoDados.fecharArquivo();
 			
+			configUrnaEletronica.setId(indiceUrna);
 			configUrnaEletronica.setMunicipio(urnaEletronica.getMunicipio());
 			configUrnaEletronica.setZonaEleitoral(urnaEletronica.getZonaEleitoral());
 			configUrnaEletronica.setSecaoEleitoral(urnaEletronica.getSecaoEleitoral());

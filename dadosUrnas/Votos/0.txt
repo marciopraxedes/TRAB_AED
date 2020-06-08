@@ -1,0 +1,4 @@
+Cristoph;78;Belo Horizonte;PCU;P;0
+Izabella;45;Belo Horizonte;Ptralha;V;3
+Paulo Henrique;22;Belo Horizonte;PCU;P;0
+Creusa;100;Belo Horizonte;Ptralha;V;0

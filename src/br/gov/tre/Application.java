@@ -146,7 +146,7 @@ public class Application {
 				bancoDados.fecharArquivo();
 				
 				ExportarDadosUrna export = new ExportarDadosUrna();
-				export.exportarDados(listaUrnasEletronicas.listaDeUrnas(), tabelaCandidatos.listaCandidatos(), tabelaEleitores.listaEleitores());
+				export.exportarDadosParaUrnas(listaUrnasEletronicas.listaDeUrnas(), tabelaCandidatos.listaCandidatos(), tabelaEleitores.listaEleitores());
 				
 				break;
 
@@ -158,7 +158,7 @@ public class Application {
 		}		
 
 		int proximaAcao = Integer.parseInt(JOptionPane.showInputDialog(null, "Deseja voltar para menu principal?"
-				+ "\n\n'1' - SIM \t\t'2' - NÃO"));
+				+ "\n\n'1' - SIM  -  '2' - NÃO"));
 
 		if(proximaAcao == 1) return (0); else return(4);		
 

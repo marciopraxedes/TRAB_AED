@@ -5,6 +5,15 @@ import br.gov.tre.resources.eleitor.TabelaHashEleitor;
 
 public class ConfigUrnaEletronica  {
 	
+	private int id;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	private String municipio;
 	private int zonaEleitoral;
 	private int secaoEleitoral;
@@ -43,12 +52,13 @@ public class ConfigUrnaEletronica  {
 	}
 	
 	public ConfigUrnaEletronica(String municipio, int zonaEleitoral, int secaoEleitoral,
-			TabelaHashCandidato tabelaCandidatos, TabelaHashEleitor tabelaEleitores) {
+			TabelaHashCandidato tabelaCandidatos, TabelaHashEleitor tabelaEleitores, int id) {
 		this.municipio = municipio;
 		this.zonaEleitoral = zonaEleitoral;
 		this.secaoEleitoral = secaoEleitoral;
 		this.tabelaCandidatos = tabelaCandidatos;
 		this.tabelaEleitores = tabelaEleitores;
+		this.id = id;
 	}
 	
 	public ConfigUrnaEletronica() {
