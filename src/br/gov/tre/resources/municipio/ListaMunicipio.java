@@ -1,5 +1,7 @@
 package br.gov.tre.resources.municipio;
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 import br.gov.tre.models.Municipio;
@@ -152,7 +154,32 @@ public class ListaMunicipio {
             }
         }
         JOptionPane.showMessageDialog(null, dadosEmLinha);
-    }    
+    }   
+    
+	public ArrayList<Municipio> listaDeMunicipios(){
+	    	
+	    	ArrayList<Municipio> listaDeMunicipios = new ArrayList<>();
+	    	
+	    	CelulaMunicipio aux;
+	
+	        aux = primeiro.proximo;
+	
+	        if (aux == null)
+	        {
+	        	System.out.println("A lista de urnas está vazia.");
+	        }
+	        else
+	        {
+	            while (aux != null)
+	            {
+	            	listaDeMunicipios.add(aux.item);        
+	                aux = aux.proximo;
+	            }
+	        }
+	    	
+	    	return listaDeMunicipios;
+    	
+    }
 
     
 }

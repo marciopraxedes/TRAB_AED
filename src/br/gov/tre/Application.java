@@ -10,6 +10,7 @@ import br.gov.tre.resources.partidopolitico.ListaPartidoPolitico;
 import br.gov.tre.resources.urna.ListaUrnaEletronica;
 import br.gov.urnaeletronica.resources.ArquivoTexto;
 import br.gov.urnaeletronica.resources.ExportarDadosUrna;
+import br.gov.urnaeletronica.resources.ResultadosEleicao;
 
 public class Application {
 
@@ -104,7 +105,8 @@ public class Application {
 	
 				case 2:
 					System.out.println("Listar prefeitos eleitos");
-						
+					ResultadosEleicao resultado = new ResultadosEleicao();
+					resultado.processaPorMunicipio(listaMunicipios);
 				
 					break;
 	
