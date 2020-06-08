@@ -4,15 +4,10 @@ import javax.swing.JOptionPane;
 
 import br.gov.resources.candidato.TabelaHashCandidato;
 import br.gov.tre.resources.eleitor.TabelaHashEleitor;
-<<<<<<< HEAD
-import br.gov.tre.resources.municipio.ListaMunicipio;
-=======
 
 import br.gov.tre.resources.municipio.ListaMunicipio;
 import br.gov.tre.resources.partidopolitico.ListaPartidoPolitico;
 import br.gov.tre.resources.urna.ListaUrnaEletronica;
-
->>>>>>> e8d16b102e523b84ab2185bc9b9c2d1ed51afe4a
 import br.gov.urnaeletronica.resources.ArquivoTexto;
 import br.gov.urnaeletronica.resources.ExportarDadosUrna;
 

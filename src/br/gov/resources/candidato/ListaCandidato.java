@@ -3,8 +3,6 @@ package br.gov.resources.candidato;
 import java.util.ArrayList;
 
 import br.gov.tre.models.Candidato;
-import br.gov.tre.models.Eleitor;
-import br.gov.tre.resources.eleitor.CelulaEleitor;
 
 public class ListaCandidato {
 	
@@ -165,7 +163,7 @@ public class ListaCandidato {
 
         if (aux == null)
         {
-        	System.out.println("A lista de produtos está vazia.");
+        	System.out.println("A lista de produtos estï¿½ vazia.");
         }
         else 
         {
