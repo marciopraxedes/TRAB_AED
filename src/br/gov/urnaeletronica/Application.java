@@ -35,8 +35,7 @@ public class Application {
 						+ "\n\n'1' para Configurar a Urna"
 						+ "\n'2' para Votar"
 						+ "\n'3' para Justificar Aus�ncia"
-						+ "\n'4' para Justificar Aus�ncia"
-						+ "\n'5' para SAIR do programa"
+						+ "\n'4' para SAIR do programa"
 						+ "\n\n Informe:"));					
 
 				switch(opcaoSelecionada) {
@@ -56,15 +55,10 @@ public class Application {
 					break;
 					
 				case 4:
-					System.out.println("Voc� escolheu exportar dados da urna eletronica.");
-					
-					break;
-					
-				case 5:
 					JOptionPane.showMessageDialog(null, "Voc� escolheu sair.");
 					System.out.println("Aplica��o encerrada.");
 					System.exit(0);
-					break;	
+					break;
 
 				default:
 					JOptionPane.showMessageDialog(null, "Op��o inv�lida.");
