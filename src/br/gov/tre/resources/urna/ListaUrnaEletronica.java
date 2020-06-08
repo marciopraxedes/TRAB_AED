@@ -1,5 +1,7 @@
 package br.gov.tre.resources.urna;
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 import br.gov.tre.models.UrnaEletronica;
@@ -142,7 +144,7 @@ public class ListaUrnaEletronica {
 
         if (aux == null)
         {
-            System.out.println("A lista de produtos est� vazia.");
+        	System.out.println("A lista de urnas está vazia.");
         }
         else
         {
@@ -153,5 +155,31 @@ public class ListaUrnaEletronica {
             }
         }
         JOptionPane.showMessageDialog(null, dadosEmLinha);
-    }    
+    }
+    
+    public ArrayList<UrnaEletronica> listaDeUrnas(){
+    	
+    	ArrayList<UrnaEletronica> listaDeUrnas = new ArrayList<>();
+    	
+    	CelulaUrnaEletronica aux;
+
+        aux = primeiro.proximo;
+
+        if (aux == null)
+        {
+        	System.out.println("A lista de urnas está vazia.");
+        }
+        else
+        {
+            while (aux != null)
+            {
+            	listaDeUrnas.add(aux.item);        
+                aux = aux.proximo;
+            }
+        }
+    	
+    	return listaDeUrnas;
+    	
+    }
+    
 }

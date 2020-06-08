@@ -32,7 +32,7 @@ public class ArquivoTexto {
 			saida = new BufferedWriter(new FileWriter(nomeArquivo, true));
 
 			nomeArquivoLocal = nomeArquivo;
-			System.out.println("Arquivo aberto");
+			System.out.println("Arquivo " + nomeArquivoLocal + " aberto");	
 		}
 		catch (FileNotFoundException excecao) {
 			System.out.println("Arquivo n�o encontrado");
@@ -42,10 +42,12 @@ public class ArquivoTexto {
 		}
 	}
 
-	public void criarArquivoTemporario (String nomeArquivo) {
+	public void criarArquivo (String nomeArquivo) {
 
 		try {
-			saidaTemp = new BufferedWriter(new FileWriter("temp"+nomeArquivo));
+			nomeArquivoLocal = nomeArquivo+".txt";
+			saidaTemp = new BufferedWriter(new FileWriter(nomeArquivoLocal));
+			abrirArquivo(nomeArquivoLocal);			
 		}
 		catch (FileNotFoundException excecao) {
 			System.out.println("Arquivo não encontrado");
@@ -77,6 +79,7 @@ public class ArquivoTexto {
 		try {
 			entrada.close();
 			saida.close();
+			System.out.println("Arquivo " + nomeArquivoLocal + " fechado");	
 		}
 		catch (IOException excecao) {
 			System.out.println("Erro no fechamento do arquivo de leitura: " + excecao);	
@@ -162,7 +165,6 @@ public class ArquivoTexto {
 
 		return tabelaEleitor;
 	}
-	
 	public TabelaHashCandidato lerDadosCandidatos() {
 
 		int cont = qtdDados();
@@ -208,7 +210,6 @@ public class ArquivoTexto {
 
 		return tabelaCandidato;
 	}
-	
 	public ListaPartidoPolitico lerDadosPartidoPolitico() {
 
 		int cont = qtdDados();
@@ -249,8 +250,6 @@ public class ArquivoTexto {
 
 		return tabelaEleitor;
 	}
-	
-	
 	public ListaMunicipio lerDadosMunicipios() {
 
 		int cont = qtdDados();
@@ -456,17 +455,6 @@ public class ArquivoTexto {
 		}
 		catch (NullPointerException e) {
 			System.out.println("Erro - " + e);
-		}
-	}
-	
-	public void escreverTemp(String textoEntrada) {
-
-		try {
-			saidaTemp.write(textoEntrada);
-			saidaTemp.newLine();
-		}
-		catch (IOException excecao){
-			System.out.println("Erro de entrada/saída " + excecao);
 		}
 	}
 

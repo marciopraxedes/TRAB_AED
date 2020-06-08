@@ -44,17 +44,17 @@ public class Candidato extends Pessoa{
 	
 	public void imprimirDados() {
 		JOptionPane.showMessageDialog(null, "Nome do candidato: " + super.getNome() + 
-				"\nNï¿½mero do tï¿½tulo: " + getNumero() +
-				"\nMunicï¿½pio: " + super.getMunicipio() + 
+				"\nNúmero do título: " + getNumero() +
+				"\nMunicípio: " + super.getMunicipio() + 
 				"\nPartido Politico: " + getPartidoPolitico() +
 				"\nCargo: " + getCargo());
 	}
 	
 	public String retornarDadosImpressao() {
 		return "Nome do candidato: " + super.getNome() + 
-				"\nNï¿½mero do tï¿½tulo: " + getNumero() +
-				"\nMunicï¿½pio: " + super.getMunicipio() + 
-				"\nPartido Politico: " + getPartidoPolitico() +
-				"\nCargo: " + getCargo();		 
+				" - Número do título: " + getNumero() +
+				" - Município: " + super.getMunicipio() + 
+				" - Partido Politico: " + getPartidoPolitico() +
+				" - Cargo: " + getCargo();		 
 	}
 }

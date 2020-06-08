@@ -10,6 +10,7 @@ import br.gov.tre.resources.partidopolitico.ListaPartidoPolitico;
 import br.gov.tre.resources.urna.ListaUrnaEletronica;
 
 import br.gov.urnaeletronica.resources.ArquivoTexto;
+import br.gov.urnaeletronica.resources.ExportarDadosUrna;
 
 public class Application {
 
@@ -88,7 +89,7 @@ public class Application {
 
 		int selecionarAcao = 0;
 
-		if( selecionarAcao != 7 ) {
+		if( selecionarAcao != 6 ) {
 			selecionarAcao = Integer.parseInt(JOptionPane.showInputDialog(null, "Preparação da Eleição."
 					+ "\n\nO que deseja fazer?."
 					+ "\n\n'1' Cadastro de partidos políticos"
@@ -96,8 +97,7 @@ public class Application {
 					+ "\n'3' Cadastro dos candidatos a prefeito e vereador"
 					+ "\n'4' Cadastro dos eleitores"
 					+ "\n'5' Cadastro das urnas eletrônicas"
-					+ "\n'6' Exportar dados para as urnas eletrônicas"
-					+ "\n'7' Para SAIR"
+					+ "\n'6' Para SAIR"
 					+ "\n\n Informe:"));
 
 			switch(selecionarAcao) {
@@ -136,11 +136,20 @@ public class Application {
 				listaUrnasEletronicas = bancoDados.lerDadosUrnasEletronicas();	
 				listaUrnasEletronicas.imprimirTodosDados();
 				bancoDados.fecharArquivo();
+				
+				bancoDados.abrirArquivo(arquivoEleitores+".txt");
+				tabelaEleitores = bancoDados.lerDadosEleitores();	
+				bancoDados.fecharArquivo();
+				
+				bancoDados.abrirArquivo(arquivoCandidatos+".txt");
+				tabelaCandidatos = bancoDados.lerDadosCandidatos();	
+				bancoDados.fecharArquivo();
+				
+				ExportarDadosUrna export = new ExportarDadosUrna();
+				export.exportarDados(listaUrnasEletronicas.listaDeUrnas(), tabelaCandidatos.listaCandidatos(), tabelaEleitores.listaEleitores());
+				
 				break;
 
-			case 6:
-
-				break;
 			default:
 
 				break;

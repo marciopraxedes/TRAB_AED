@@ -1,8 +1,11 @@
 package br.gov.resources.candidato;
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 import br.gov.tre.models.Candidato;
+import br.gov.tre.models.Eleitor;
 
 public class TabelaHashCandidato {
 	private int M;
@@ -96,4 +99,19 @@ public class TabelaHashCandidato {
 		
 		JOptionPane.showMessageDialog(null, listatabelaCandidatos);
 	}
+	
+    public ArrayList<Candidato> listaCandidatos(){
+    	
+    	ArrayList<Candidato> listaCandidatos = new ArrayList<Candidato>();
+    	
+    	for(int i=0 ; i < M ; i++ ) {
+    		System.out.print(i);
+			if ((tabelaCandidatos[i].listaVazia()!=true)) {
+					listaCandidatos.addAll(tabelaCandidatos[i].listaCandidatos());
+			}
+		}    	
+    	
+    	return listaCandidatos;
+    	
+    }
 }

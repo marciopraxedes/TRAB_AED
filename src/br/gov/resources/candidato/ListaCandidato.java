@@ -1,6 +1,10 @@
 package br.gov.resources.candidato;
 
+import java.util.ArrayList;
+
 import br.gov.tre.models.Candidato;
+import br.gov.tre.models.Eleitor;
+import br.gov.tre.resources.eleitor.CelulaEleitor;
 
 public class ListaCandidato {
 	
@@ -150,4 +154,28 @@ public class ListaCandidato {
         }
         return dadosEmLinha;
     } 
+    
+    public ArrayList<Candidato> listaCandidatos(){
+    	
+    	ArrayList<Candidato> listaEleitores = new ArrayList<Candidato>();
+    	
+    	CelulaCandidato aux;
+
+        aux = primeiro.proximo;
+
+        if (aux == null)
+        {
+        	System.out.println("A lista de produtos está vazia.");
+        }
+        else 
+        {
+            while (aux != null)
+            {
+            	listaEleitores.add(aux.item);        
+                aux = aux.proximo;
+            }
+        }    	
+    	return listaEleitores;
+    	
+    }
 }
