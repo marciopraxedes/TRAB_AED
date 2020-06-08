@@ -2,7 +2,16 @@ package br.gov.urnaeletronica;
 
 import javax.swing.JOptionPane;
 
+import br.gov.tre.models.UrnaEletronica;
+import br.gov.urnaeletronica.resources.ArquivoTexto;
+import br.gov.urnaeletronica.resources.ConfigUrnaEletronica;
+import br.gov.urnaeletronica.resources.ImportarDadosUrna;
+
 public class Application {
+	
+	private static ArquivoTexto bancoDados = new ArquivoTexto();
+	
+	private static ConfigUrnaEletronica configUrnaEletronica;
 
 	public static void main(String[] args) {
 
@@ -19,22 +28,29 @@ public class Application {
 			do{
 				opcaoSelecionada = Integer.parseInt(JOptionPane.showInputDialog(null, "Bem vindo ao Sistema de Gestão da Eleição."
 						+ "\n\nEscolha uma opção."
-						+ "\n\n'1' para Votar"
-						+ "\n'2' para Justificar Ausência"
-						+ "\n'3' para SAIR do programa"
+						+ "\n\n'1' para Configurar a Urna"
+						+ "\n'2' para Votar"
+						+ "\n'3' para Justificar Ausência"
+						+ "\n'4' para SAIR do programa"
 						+ "\n\n Informe:"));					
 
 				switch(opcaoSelecionada) {
 				case 1:
-					System.out.println("Votar");
+					System.out.println("Configurar a Urna");
+					configurarUrna();
 					
 					break;
 				case 2:
-					System.out.println("Justificar Ausência");
+					System.out.println("Votar");
+					
 
 					break;
 
 				case 3:
+					System.out.println("Justificar Ausência");
+					break;
+					
+				case 4:
 					JOptionPane.showMessageDialog(null, "Você escolheu sair.");
 					System.out.println("Aplicação encerrada.");
 					System.exit(0);
@@ -45,7 +61,7 @@ public class Application {
 					System.out.println("Opção inválida.");
 					break;
 				}
-			} while(opcaoSelecionada != 3);
+			} while(opcaoSelecionada != 4);
 
 		}
 		
@@ -55,59 +71,20 @@ public class Application {
 
 	}
 
-	private static int etapaPreparacao() {
-
-		int selecionarAcao = 0;
-
-		if( selecionarAcao != 6 ) {
-			selecionarAcao = Integer.parseInt(JOptionPane.showInputDialog(null, "Preparação da Eleição."
-					+ "\n\nO que deseja fazer?."
-					+ "\n\n'1' Cadastro de partidos políticos"
-					+ "\n'2' Cadastro de municipios"
-					+ "\n'3' Cadastro dos candidatos a prefeito e vereador"
-					+ "\n'4' Cadastro dos eleitores"
-					+ "\n'5' Cadastro das urnas eletrônicas"
-					+ "\n'6' Para SAIR"
-					+ "\n\n Informe:"));
-
-			switch(selecionarAcao) {
-			case 1:
-				System.out.println("Cadastro de partidos políticos");
+	private static void configurarUrna() {
 		
-				break;
-
-			case 2:
-				System.out.println("Cadastro de municipios");
-	
-			
-				break;
-
-			case 3:
-
-
-				break;
-
-			case 4:
-
-
-				break;
-			case 5:
-
-				
-				break;
-
-			default:
-
-				break;
-			}
-
-		}		
-
-		int proximaAcao = Integer.parseInt(JOptionPane.showInputDialog(null, "Deseja voltar para menu principal?"
-				+ "\n\n'1' - SIM \t\t'2' - NÃO"));
-
-		if(proximaAcao == 1) return (0); else return(4);		
-
+		UrnaEletronica urnaEletronica = new UrnaEletronica();
+		
+		urnaEletronica.setMunicipio(JOptionPane.showInputDialog(null, "Configuração da Urna Eletrônica"
+				+ "\n\nDigite o nome do municipio"));
+		urnaEletronica.setZonaEleitoral(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o número da Zona Eleitoral")));
+		urnaEletronica.setSecaoEleitoral(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o número da Seção Eleitoral")));
+		
+		ImportarDadosUrna importarDados = new ImportarDadosUrna();
+		
+		configUrnaEletronica = importarDados.importDados(urnaEletronica, "urnasEletronicas");
+		
+		JOptionPane.showMessageDialog(null, "Urna configurada com sucesso!");
 	}
 
 }	

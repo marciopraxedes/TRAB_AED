@@ -26,9 +26,11 @@ public class ExportarDadosUrna {
 
 			for (int j = 0; j < listaEleitores.size(); j++) {
 
-				if (listaEleitores.get(j).getSecaoEleitoral() == listaDeUrnas.get(i).getSecaoEleitoral()) {
-					String entradaArquivo = j + ";" + listaEleitores.get(j).getNumeroTitulo() + ";"
-							+ listaDeUrnas.get(i).getMunicipio() + ";" + listaEleitores.get(j).getSecaoEleitoral();
+				if (listaEleitores.get(j).getSecaoEleitoral() == listaDeUrnas.get(i).getSecaoEleitoral() 
+						&& listaEleitores.get(j).getZonaEleitoral() == listaDeUrnas.get(i).getZonaEleitoral() ) {
+					String entradaArquivo = listaEleitores.get(j).getNome() + ";" + listaEleitores.get(j).getNumeroTitulo() + ";"
+							+ listaDeUrnas.get(i).getMunicipio() + ";" + listaEleitores.get(j).getZonaEleitoral() + ";" 
+							+ listaEleitores.get(j).getSecaoEleitoral();
 					bancoDados.escrever(entradaArquivo);
 				}
 			}
@@ -46,10 +48,9 @@ public class ExportarDadosUrna {
 			for (int j = 0; j < listaCandidatos.size(); j++) {
 				
 				if (listaCandidatos.get(j).getMunicipio().contains(listaDeUrnas.get(i).getMunicipio())) {
-					System.out.println("Candidato: " + listaCandidatos.get(j).getMunicipio() + " - Urna: " + listaDeUrnas.get(i).getMunicipio() );
-					String entradaArquivo = j + ";" + listaCandidatos.get(j).getNome() + ";"
-							+ listaCandidatos.get(j).getMunicipio() + ";" + listaCandidatos.get(j).getNumero() + ";"
-							+ listaCandidatos.get(j).getPartidoPolitico() + ";" + listaCandidatos.get(j).getCargo();
+					String entradaArquivo = listaCandidatos.get(j).getNome() + ";" + listaCandidatos.get(j).getNumero() + ";"
+							+ listaCandidatos.get(j).getMunicipio() + ";" + listaCandidatos.get(j).getPartidoPolitico() + ";" 
+							+ listaCandidatos.get(j).getCargo();
 					bancoDados.escrever(entradaArquivo);
 				}
 			}

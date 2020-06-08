@@ -35,7 +35,8 @@ public class ArquivoTexto {
 			System.out.println("Arquivo " + nomeArquivoLocal + " aberto");	
 		}
 		catch (FileNotFoundException excecao) {
-			System.out.println("Arquivo n�o encontrado");
+			
+			System.out.println("Arquivo " + nomeArquivo + " não encontrado");
 		}
 		catch (IOException excecao) {
 			System.out.println("Erro na abertura do arquivo de escrita: " + excecao);
@@ -47,6 +48,7 @@ public class ArquivoTexto {
 		try {
 			nomeArquivoLocal = nomeArquivo+".txt";
 			saidaTemp = new BufferedWriter(new FileWriter(nomeArquivoLocal));
+			System.out.println("Arquivo " + nomeArquivoLocal + " criado com sucesso!");
 			abrirArquivo(nomeArquivoLocal);			
 		}
 		catch (FileNotFoundException excecao) {
@@ -122,6 +124,7 @@ public class ArquivoTexto {
 
 	public TabelaHashEleitor lerDadosEleitores() {
 
+		System.out.println("Ler dados dos eleitores");
 		int cont = qtdDados();
 		TabelaHashEleitor tabelaEleitor = new TabelaHashEleitor(cont);
 
@@ -160,7 +163,7 @@ public class ArquivoTexto {
 		}
 
 		catch (NumberFormatException excecao) {
-			System.out.println("\nERROR - N�o � n�mero" + excecao + "\n");
+			System.out.println("\nERROR - Formato de número inválido" + excecao + "\n");
 		}
 
 		return tabelaEleitor;
@@ -205,7 +208,7 @@ public class ArquivoTexto {
 		}
 
 		catch (NumberFormatException excecao) {
-			System.out.println("\nERROR - N�o � n�mero" + excecao + "\n");
+			System.out.println("\nERROR - Não é número" + excecao + "\n");
 		}
 
 		return tabelaCandidato;

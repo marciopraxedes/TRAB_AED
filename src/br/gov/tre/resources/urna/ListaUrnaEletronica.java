@@ -87,19 +87,21 @@ public class ListaUrnaEletronica {
         return null;
     }
     */
-    public UrnaEletronica retornarItem(){
+    public int retornarIndiceItem(UrnaEletronica urna){
     
         CelulaUrnaEletronica aux;
-        UrnaEletronica urnaEletronica = null;
-
         aux = primeiro.proximo;
+        int cont = 0;
 
         while (aux != null)
-        {		
-        	urnaEletronica = aux.item;
+        {	
+        	if( urna.equals(aux.item)) {
+        		return cont;
+        	}
+        	cont ++;
             aux = aux.proximo;
             }
-        return urnaEletronica;
+        return 0;
         }
         
     public Boolean listaVazia()

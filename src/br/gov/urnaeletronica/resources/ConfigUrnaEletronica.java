@@ -1,25 +1,21 @@
 package br.gov.urnaeletronica.resources;
 
-import br.gov.tre.models.Candidato;
+import br.gov.resources.candidato.TabelaHashCandidato;
+import br.gov.tre.resources.eleitor.TabelaHashEleitor;
 
-public class ConfigUrnaEletronica extends Candidato {
-
-	private int Id;
-	private long numeroTitulo;
+public class ConfigUrnaEletronica  {
+	
+	private String municipio;
 	private int zonaEleitoral;
 	private int secaoEleitoral;
+	private TabelaHashCandidato tabelaCandidatos;
+	private TabelaHashEleitor tabelaEleitores;
 	
-	public int getId() {
-		return Id;
+	public String getMunicipio() {
+		return municipio;
 	}
-	public void setId(int id) {
-		Id = id;
-	}
-	public long getNumeroTitulo() {
-		return numeroTitulo;
-	}
-	public void setNumeroTitulo(long numeroTitulo) {
-		this.numeroTitulo = numeroTitulo;
+	public void setMunicipio(String municipio) {
+		this.municipio = municipio;
 	}
 	public int getZonaEleitoral() {
 		return zonaEleitoral;
@@ -33,16 +29,33 @@ public class ConfigUrnaEletronica extends Candidato {
 	public void setSecaoEleitoral(int secaoEleitoral) {
 		this.secaoEleitoral = secaoEleitoral;
 	}
+	public TabelaHashCandidato getTabelaCandidatos() {
+		return tabelaCandidatos;
+	}
+	public void setTabelaCandidatos(TabelaHashCandidato tabelaCandidatos) {
+		this.tabelaCandidatos = tabelaCandidatos;
+	}
+	public TabelaHashEleitor getTabelaEleitores() {
+		return tabelaEleitores;
+	}
+	public void setTabelaEleitores(TabelaHashEleitor tabelaEleitores) {
+		this.tabelaEleitores = tabelaEleitores;
+	}
 	
-	public ConfigUrnaEletronica(int id, long numeroTitulo, int zonaEleitoral, int secaoEleitoral) {
-		super();
-		Id = id;
-		this.numeroTitulo = numeroTitulo;
+	public ConfigUrnaEletronica(String municipio, int zonaEleitoral, int secaoEleitoral,
+			TabelaHashCandidato tabelaCandidatos, TabelaHashEleitor tabelaEleitores) {
+		this.municipio = municipio;
 		this.zonaEleitoral = zonaEleitoral;
 		this.secaoEleitoral = secaoEleitoral;
+		this.tabelaCandidatos = tabelaCandidatos;
+		this.tabelaEleitores = tabelaEleitores;
 	}
+	
 	public ConfigUrnaEletronica() {
-		// TODO Auto-generated constructor stub
+		
 	}
+
+	
+	
 		
 }
