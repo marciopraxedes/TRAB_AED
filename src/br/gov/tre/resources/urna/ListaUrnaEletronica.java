@@ -30,76 +30,22 @@ public class ListaUrnaEletronica {
 
 		ultimo = ultimo.proximo;
 	}
-/*
-    public UrnaEletronica retirar(String urnaEletronica)
-    {
-    	CelulaUrnaEletronica aux, anterior;
 
-
-        anterior = primeiro;
-
-
-        aux = primeiro.proximo;
-
-
-        while (aux != null)
-        {
-
-            if (aux.item.getNome() == urnaEletronica)
-            {
-
-                anterior.proximo = aux.proximo;
-
-                if (aux == ultimo)
-                {
-
-                    ultimo = anterior;
-                }
-                return aux.item;
-            }
-            else
-            {
-
-                anterior = aux;
-                aux = aux.proximo;
-            }
-        }
-        return null;
-    }
-    
-    public PartidoPolitico localizar(String nomePartido)
-    {
-        CelulaPartidoPolitico aux;
-
-        aux = primeiro.proximo;
-
-        while (aux != null)
-        {
-            if (aux.item.getNome() == nomePartido)
-            {
-                return aux.item;
-            }
-            else
-            {
-                aux = aux.proximo;
-            }
-        }
-        return null;
-    }
-    */
-    public UrnaEletronica retornarItem(){
+    public int retornarIndiceItem(UrnaEletronica urna){
     
         CelulaUrnaEletronica aux;
-        UrnaEletronica urnaEletronica = null;
-
         aux = primeiro.proximo;
+        int cont = 0;
 
         while (aux != null)
-        {		
-        	urnaEletronica = aux.item;
+        {	
+        	if( urna.equals(aux.item)) {
+        		return cont;
+        	}
+        	cont ++;
             aux = aux.proximo;
             }
-        return urnaEletronica;
+        return 0;
         }
         
     public Boolean listaVazia()
