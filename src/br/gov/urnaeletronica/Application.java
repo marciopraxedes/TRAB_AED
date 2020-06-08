@@ -20,7 +20,7 @@ public class Application {
 	public static void main(String[] args) {
 
 
-		//Selecionar Opção
+		//Selecionar Opï¿½ï¿½o
 		menuOpcoes(0);
 
 	}
@@ -30,12 +30,13 @@ public class Application {
 		if(opcaoSelecionada != 4) {
 
 			do{
-				opcaoSelecionada = Integer.parseInt(JOptionPane.showInputDialog(null, "Bem vindo ao Sistema de Gestão da Eleição."
-						+ "\n\nEscolha uma opção."
+				opcaoSelecionada = Integer.parseInt(JOptionPane.showInputDialog(null, "Bem vindo ao Sistema de Gestï¿½o da Eleiï¿½ï¿½o."
+						+ "\n\nEscolha uma opï¿½ï¿½o."
 						+ "\n\n'1' para Configurar a Urna"
 						+ "\n'2' para Votar"
-						+ "\n'3' para Justificar Ausência"
-						+ "\n'4' para SAIR do programa"
+						+ "\n'3' para Justificar Ausï¿½ncia"
+						+ "\n'4' para Justificar Ausï¿½ncia"
+						+ "\n'5' para SAIR do programa"
 						+ "\n\n Informe:"));					
 
 				switch(opcaoSelecionada) {
@@ -51,26 +52,31 @@ public class Application {
 					break;
 
 				case 3:
-					System.out.println("Justificar Ausência");
+					System.out.println("Justificar Ausï¿½ncia");
 					break;
 					
 				case 4:
-					JOptionPane.showMessageDialog(null, "Você escolheu sair.");
-					System.out.println("Aplicação encerrada.");
-					System.exit(0);
+					System.out.println("Vocï¿½ escolheu exportar dados da urna eletronica.");
+					
 					break;
+					
+				case 5:
+					JOptionPane.showMessageDialog(null, "Vocï¿½ escolheu sair.");
+					System.out.println("Aplicaï¿½ï¿½o encerrada.");
+					System.exit(0);
+					break;	
 
 				default:
-					JOptionPane.showMessageDialog(null, "Opção inválida.");
-					System.out.println("Opção inválida.");
+					JOptionPane.showMessageDialog(null, "Opï¿½ï¿½o invï¿½lida.");
+					System.out.println("Opï¿½ï¿½o invï¿½lida.");
 					break;
 				}
 			} while(opcaoSelecionada != 4);
 
 		}
 		
-		JOptionPane.showMessageDialog(null, "Você escolheu sair.");
-		System.out.println("Aplicação encerrada.");
+		JOptionPane.showMessageDialog(null, "Vocï¿½ escolheu sair.");
+		System.out.println("Aplicaï¿½ï¿½o encerrada.");
 
 
 	}
@@ -79,10 +85,10 @@ public class Application {
 		
 		UrnaEletronica urnaEletronica = new UrnaEletronica();
 		
-		urnaEletronica.setMunicipio(JOptionPane.showInputDialog(null, "Configuração da Urna Eletrônica"
+		urnaEletronica.setMunicipio(JOptionPane.showInputDialog(null, "Configuraï¿½ï¿½o da Urna Eletrï¿½nica"
 				+ "\n\nDigite o nome do municipio"));
-		urnaEletronica.setZonaEleitoral(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o número da Zona Eleitoral")));
-		urnaEletronica.setSecaoEleitoral(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o número da Seção Eleitoral")));
+		urnaEletronica.setZonaEleitoral(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o nï¿½mero da Zona Eleitoral")));
+		urnaEletronica.setSecaoEleitoral(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o nï¿½mero da Seï¿½ï¿½o Eleitoral")));
 		
 		ImportarDadosUrna importarDados = new ImportarDadosUrna();
 		
@@ -95,27 +101,27 @@ public class Application {
 	private static void votar() {
 		
 		if(configUrnaEletronica != null ) {
-			int numeroTitulo = Integer.parseInt(JOptionPane.showInputDialog(null, "Bem vindo à votação."
-					+ "\n\nInforme o Número do Título:"));
+			int numeroTitulo = Integer.parseInt(JOptionPane.showInputDialog(null, "Bem vindo ï¿½ votaï¿½ï¿½o."
+					+ "\n\nInforme o Nï¿½mero do Tï¿½tulo:"));
 			
 			if(verificarEleitorVotaAqui(numeroTitulo)){
 				
-				System.out.println("Eleitor vota nessa Zona e Seção eleitoral");
+				System.out.println("Eleitor vota nessa Zona e Seï¿½ï¿½o eleitoral");
 				
 				if(!verificarSeJaVotou(numeroTitulo, "dadosUrnas\\PresencaEleitores\\" + Integer.toString(configUrnaEletronica.getId()))) {
-					System.out.println("Eleitor ainda não votou. Liberado para votar");					
+					System.out.println("Eleitor ainda nï¿½o votou. Liberado para votar");					
 					realizarVoto(numeroTitulo);
 				}
 				else {
-					System.out.println("Eleitor já votou");
-					JOptionPane.showInputDialog(null, "Eleitor já votou");
+					System.out.println("Eleitor jï¿½ votou");
+					JOptionPane.showInputDialog(null, "Eleitor jï¿½ votou");
 				}
 			}
 			else {
-				System.out.println("Eleitor NÃO vota nessa Zona e Seção eleitoral");
-				int opcaoSelecionada = Integer.parseInt(JOptionPane.showInputDialog(null, "Eleitor NÃO vota nessa Zona e Seção eleitoral"
-						+ "\n\nDeseja Justificar Ausência?"
-						+ "\n\n'1' SIM  -  '2' NÃO"));
+				System.out.println("Eleitor Nï¿½O vota nessa Zona e Seï¿½ï¿½o eleitoral");
+				int opcaoSelecionada = Integer.parseInt(JOptionPane.showInputDialog(null, "Eleitor Nï¿½O vota nessa Zona e Seï¿½ï¿½o eleitoral"
+						+ "\n\nDeseja Justificar Ausï¿½ncia?"
+						+ "\n\n'1' SIM  -  '2' Nï¿½O"));
 				
 				if(opcaoSelecionada == 1) {
 					justificarAusencia(numeroTitulo);
@@ -123,10 +129,10 @@ public class Application {
 			}
 		}
 		else {
-			int opcaoSelecionada = Integer.parseInt(JOptionPane.showInputDialog(null, "A urna não foi configurada."
+			int opcaoSelecionada = Integer.parseInt(JOptionPane.showInputDialog(null, "A urna nï¿½o foi configurada."
 					+ "\n\nDeseja configurar a urna?"
-					+ "\n\n'1' SIM  -  '2' NÃO"));
-			System.out.println("A urna não foi configurada.");
+					+ "\n\n'1' SIM  -  '2' Nï¿½O"));
+			System.out.println("A urna nï¿½o foi configurada.");
 			
 			if(opcaoSelecionada == 1) {
 				configurarUrna();
@@ -170,7 +176,7 @@ public class Application {
 		
 		do {
 			numeroCandidato = Integer.parseInt(JOptionPane.showInputDialog(null, "Escolha do candidato."
-					+ "\n\nDigite o número do candidato"));
+					+ "\n\nDigite o nï¿½mero do candidato"));
 			candidatoValido = verificaCadidatoValido(numeroCandidato);			
 			
 		} while(!candidatoValido);
@@ -221,7 +227,7 @@ public class Application {
 		bancoDados.fecharArquivo();
 		
 		
-		System.out.println("Presença do eleitor registrada com sucesso!");
+		System.out.println("Presenï¿½a do eleitor registrada com sucesso!");
 	}
 }	
 
