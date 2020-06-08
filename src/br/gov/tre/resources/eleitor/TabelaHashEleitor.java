@@ -1,8 +1,12 @@
 package br.gov.tre.resources.eleitor;
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 import br.gov.tre.models.Eleitor;
+import br.gov.tre.models.UrnaEletronica;
+import br.gov.tre.resources.urna.CelulaUrnaEletronica;
 
 public class TabelaHashEleitor {
 
@@ -97,7 +101,21 @@ public class TabelaHashEleitor {
 		
 		JOptionPane.showMessageDialog(null, listaTabelaEleitores);
 	}
-		
+	
+    public ArrayList<Eleitor> listaEleitores(){
+    	
+    	ArrayList<Eleitor> listaEleitores = new ArrayList<Eleitor>();
+    	
+    	for(int i=0 ; i < M ; i++ ) {
+    		System.out.print(i);
+			if ((tabelaEleitores[i].listaVazia()!=true)) {
+					listaEleitores.addAll(tabelaEleitores[i].listaEleitores());
+			}
+		}    	
+    	
+    	return listaEleitores;
+    	
+    }
 		
 }
 

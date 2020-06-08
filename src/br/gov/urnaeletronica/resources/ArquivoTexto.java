@@ -9,9 +9,11 @@ import br.gov.tre.models.Candidato;
 import br.gov.tre.models.Eleitor;
 import br.gov.tre.models.Municipio;
 import br.gov.tre.models.PartidoPolitico;
+import br.gov.tre.models.UrnaEletronica;
 import br.gov.tre.resources.eleitor.TabelaHashEleitor;
 import br.gov.tre.resources.municipio.ListaMunicipio;
 import br.gov.tre.resources.partidopolitico.ListaPartidoPolitico;
+import br.gov.tre.resources.urna.ListaUrnaEletronica;
 
 public class ArquivoTexto {
 
@@ -30,7 +32,7 @@ public class ArquivoTexto {
 			saida = new BufferedWriter(new FileWriter(nomeArquivo, true));
 
 			nomeArquivoLocal = nomeArquivo;
-			System.out.println("Arquivo aberto");
+			System.out.println("Arquivo " + nomeArquivoLocal + " aberto");	
 		}
 		catch (FileNotFoundException excecao) {
 			System.out.println("Arquivo n�o encontrado");
@@ -40,10 +42,12 @@ public class ArquivoTexto {
 		}
 	}
 
-	public void criarArquivoTemporario (String nomeArquivo) {
+	public void criarArquivo (String nomeArquivo) {
 
 		try {
-			saidaTemp = new BufferedWriter(new FileWriter("temp"+nomeArquivo));
+			nomeArquivoLocal = nomeArquivo+".txt";
+			saidaTemp = new BufferedWriter(new FileWriter(nomeArquivoLocal));
+			abrirArquivo(nomeArquivoLocal);			
 		}
 		catch (FileNotFoundException excecao) {
 			System.out.println("Arquivo não encontrado");
@@ -75,6 +79,7 @@ public class ArquivoTexto {
 		try {
 			entrada.close();
 			saida.close();
+			System.out.println("Arquivo " + nomeArquivoLocal + " fechado");	
 		}
 		catch (IOException excecao) {
 			System.out.println("Erro no fechamento do arquivo de leitura: " + excecao);	
@@ -160,7 +165,6 @@ public class ArquivoTexto {
 
 		return tabelaEleitor;
 	}
-	
 	public TabelaHashCandidato lerDadosCandidatos() {
 
 		int cont = qtdDados();
@@ -206,7 +210,6 @@ public class ArquivoTexto {
 
 		return tabelaCandidato;
 	}
-	
 	public ListaPartidoPolitico lerDadosPartidoPolitico() {
 
 		int cont = qtdDados();
@@ -247,8 +250,6 @@ public class ArquivoTexto {
 
 		return tabelaEleitor;
 	}
-	
-	
 	public ListaMunicipio lerDadosMunicipios() {
 
 		int cont = qtdDados();
@@ -291,6 +292,48 @@ public class ArquivoTexto {
 
 		return tabelaMunicipio;
 	}
+	public ListaUrnaEletronica lerDadosUrnasEletronicas() {
+
+		int cont = qtdDados();
+		ListaUrnaEletronica listaUrnaEletronica = new ListaUrnaEletronica();
+
+		try {
+			for (int index = 0 ; index < cont ; index++) {
+
+				//CONVERTE CADA LINHA EM UM VETOR DE STRING
+				String arrayConversor[];
+				arrayConversor = entrada.readLine().split(";");
+
+				//ARMAZEVA E CONVERTE O VALOR DE CADA POSICAO DO VETOR EM UMA VARIAVEL
+				UrnaEletronica novaUrnaEletronica = new UrnaEletronica();
+				novaUrnaEletronica.setMunicipio(arrayConversor[0]); 
+				novaUrnaEletronica.setZonaEleitoral(Integer.parseInt(arrayConversor[1]));
+				novaUrnaEletronica.setSecaoEleitoral(Integer.parseInt(arrayConversor[2]));
+
+				//INSERE UMA NOVA PESSOA. SE RETORNAR -1, PESSOA J� EXITE
+				listaUrnaEletronica.inserirFinal(novaUrnaEletronica);
+									
+			}			
+			retornarInicioArquivo();		
+
+		}
+
+
+		catch (EOFException excecao) { //Exce��o de final de arquivo.
+			System.out.println("Fim de arquivo." + excecao);
+
+		}
+		catch (IOException excecao) {
+			System.out.println("Erro de leitura: " + excecao);
+		}
+
+		catch (NumberFormatException excecao) {
+			System.out.println("\nERROR - N�o � n�mero" + excecao + "\n");
+		}
+
+		return listaUrnaEletronica;
+	}
+	
 /*
 	public void alterarEleitor (long numeroTitulo) {
 		int opcao = 0;
@@ -412,17 +455,6 @@ public class ArquivoTexto {
 		}
 		catch (NullPointerException e) {
 			System.out.println("Erro - " + e);
-		}
-	}
-	
-	public void escreverTemp(String textoEntrada) {
-
-		try {
-			saidaTemp.write(textoEntrada);
-			saidaTemp.newLine();
-		}
-		catch (IOException excecao){
-			System.out.println("Erro de entrada/saída " + excecao);
 		}
 	}
 

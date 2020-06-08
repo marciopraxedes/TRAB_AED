@@ -1,6 +1,10 @@
 package br.gov.tre.resources.eleitor;
 
+import java.util.ArrayList;
+
 import br.gov.tre.models.Eleitor;
+import br.gov.tre.models.UrnaEletronica;
+import br.gov.tre.resources.urna.CelulaUrnaEletronica;
 
 public class ListaEleitor {
 
@@ -139,7 +143,7 @@ public class ListaEleitor {
 
         if (aux == null)
         {
-            System.out.println("A lista de produtos est� vazia.");
+            System.out.println("A lista de produtos está vazia.");
         }
         else
         {
@@ -150,7 +154,32 @@ public class ListaEleitor {
             }
         }
         return dadosEmLinha;
-    }    
+    }
+    
+    public ArrayList<Eleitor> listaEleitores(){
+    	
+    	ArrayList<Eleitor> listaEleitores = new ArrayList<Eleitor>();
+    	
+    	CelulaEleitor aux;
+
+        aux = primeiro.proximo;
+
+        if (aux == null)
+        {
+        	System.out.println("A lista de produtos está vazia.");
+        }
+        else 
+        {
+            while (aux != null)
+            {
+            	listaEleitores.add(aux.item);        
+                aux = aux.proximo;
+            }
+        }    	
+    	return listaEleitores;
+    	
+    }
+    
 
     
 }

@@ -1,0 +1,3 @@
+Belo Horizonte;658489;254
+Contagem;265895;253
+Santa Luzia;958476;658
