@@ -6,7 +6,16 @@ public class Candidato extends Pessoa{
 	private int numero;
 	private String partidoPolitico;
 	private char cargo;
+	private int qtdVotos;	
 	
+	public int getQtdVotos() {
+		return qtdVotos;
+	}
+
+	public void setQtdVotos(int qtdVotos) {
+		this.qtdVotos = qtdVotos;
+	}
+
 	public Candidato() {
 		super();
 	}

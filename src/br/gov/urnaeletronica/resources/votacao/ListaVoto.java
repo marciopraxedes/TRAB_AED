@@ -103,7 +103,7 @@ public class ListaVoto {
 
 	public ArrayList<Voto> listaVotos() {
 
-		ArrayList<Voto> listaDeUrnas = new ArrayList<>();
+		ArrayList<Voto> listaDeUrnas = new ArrayList<Voto>();
 
 		CelulaVoto aux;
 
