@@ -26,7 +26,7 @@ public class ListaVoto {
 
 		ultimo = ultimo.proximo;
 	}
-	// Método responsável por adic
+	
 	public int retornarIndiceItem(Voto voto) {
 
 		CelulaVoto aux;
