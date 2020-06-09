@@ -1,8 +1,11 @@
 package br.gov.tre;
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 import br.gov.resources.candidato.TabelaHashCandidato;
+import br.gov.tre.models.Candidato;
 import br.gov.tre.resources.eleitor.TabelaHashEleitor;
 
 import br.gov.tre.resources.municipio.ListaMunicipio;
@@ -106,8 +109,18 @@ public class Application {
 				case 2:
 					System.out.println("Listar prefeitos eleitos");
 					ResultadosEleicao resultado = new ResultadosEleicao();
-					resultado.processaPorMunicipio(listaMunicipios);
+					String municipio = JOptionPane.showInputDialog(null, "Digite o nome do município");
+					ArrayList<Candidato> candidatos = resultado.processarPrefeiroVencedor(municipio);
 				
+					if(candidatos.size() == 1) {
+						JOptionPane.showMessageDialog(null, "Prefeito vencedor: " + candidatos.get(0).getNome());
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Será encessário segundo turno"
+								+ "\nCandidato: " + candidatos.get(0).getNome() + " - Votos: " + candidatos.get(0).getQtdVotos()
+								+ "\nCandidato: " + candidatos.get(1).getNome() + " - Votos: " + candidatos.get(1).getQtdVotos());
+					}
+					
 					break;
 	
 				case 3:

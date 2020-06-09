@@ -103,7 +103,7 @@ public class ListaVoto {
 	// Método responsável por listar as urnas ou retornar uma mensagem caso a lista de urnas esteja vazia.
 	public ArrayList<Voto> listaVotos() {
 
-		ArrayList<Voto> listaDeUrnas = new ArrayList<>();
+		ArrayList<Voto> listaDeUrnas = new ArrayList<Voto>();
 
 		CelulaVoto aux;
 
