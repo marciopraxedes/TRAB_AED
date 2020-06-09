@@ -11,12 +11,12 @@ public class ListaVoto {
 	private CelulaVoto primeiro;
 
 	private CelulaVoto ultimo;
-
+	
 	public ListaVoto() {
 		primeiro = new CelulaVoto();
 		ultimo = primeiro;
 	}
-
+	// Método responsável por inserir novo voto na contagem.
 	public void inserirFinal(Voto novoVoto) {
 		CelulaVoto aux = new CelulaVoto();
 
@@ -26,7 +26,7 @@ public class ListaVoto {
 
 		ultimo = ultimo.proximo;
 	}
-
+	// Método responsável por adic
 	public int retornarIndiceItem(Voto voto) {
 
 		CelulaVoto aux;
@@ -42,7 +42,7 @@ public class ListaVoto {
 		}
 		return 0;
 	}
-
+	// Método responsável por atualizar a quantidade de votos de cada candidato.
 	public boolean atualizarVotosCandidato(int numeroCandidato) {
 
 		CelulaVoto aux;
@@ -59,7 +59,7 @@ public class ListaVoto {
 		System.out.println("Candidato não encontrato");
 		return false;
 	}
-
+	// Método responsável por retornar se a lista está vazia ou não.
 	public Boolean listaVazia() {
 		if (primeiro == ultimo) {
 			return true;
@@ -67,7 +67,7 @@ public class ListaVoto {
 			return false;
 		}
 	}
-
+	// Método responsável por imprimir individualmente a lista de votos ou retornar uma mensagem caso esteja vazia.
 	public void imprimirIndividualmente() {
 		CelulaVoto aux;
 
@@ -82,7 +82,7 @@ public class ListaVoto {
 			}
 		}
 	}
-
+	// Método responsável por imprimir todos os dados da lista de votos ou retornar uma mensagem caso a lista esteja vazia.
 	public void imprimirTodosDados() {
 		CelulaVoto aux;
 
@@ -100,7 +100,7 @@ public class ListaVoto {
 		}
 		JOptionPane.showMessageDialog(null, dadosEmLinha);
 	}
-
+	// Método responsável por listar as urnas ou retornar uma mensagem caso a lista de urnas esteja vazia.
 	public ArrayList<Voto> listaVotos() {
 
 		ArrayList<Voto> listaDeUrnas = new ArrayList<>();
